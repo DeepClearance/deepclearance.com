@@ -58,7 +58,9 @@ export default function SiteHead() {
       <meta property="og:url" content={meta.url} />
       <meta property="og:image" content={OG_IMAGE} />
       <meta property="og:image:alt" content={SITE_NAME} />
-      <meta property="og:image:type" content="image/svg+xml" />
+      <meta property="og:image:type" content="image/png" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={meta.title} />
       <meta name="twitter:description" content={meta.description} />
