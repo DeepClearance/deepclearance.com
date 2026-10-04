@@ -32,11 +32,13 @@ export default function DocsPage() {
         <code>source</code> pins one topic: <code>origin_literature</code>,{" "}
         <code>secrecy_labels</code>, <code>contractor_layer</code>,{" "}
         <code>postwar_record</code>, <code>financial_control</code>,{" "}
-        <code>fiction_contamination</code>, or <code>disclosure_pressure</code>.
-        Omit it to search documents and transcripts.
+        <code>fiction_contamination</code>, <code>disclosure_pressure</code>, or{" "}
+        <code>system</code>. Omit it to search documents, transcripts, and the
+        framework together. <code>system</code> pins the architecture, the
+        governance, and the analytical layers.
       </p>
       <p>
-        Trial is 50 queries a day, Researcher 250, Developer 500.{" "}
+        Trial is 50 queries a day, Researcher 250, Control 500.{" "}
         <code>get_snapshot</code> does not count. <Link href="/pricing/">Plans</Link>{" "}
         and <Link href="/account/">Account</Link> hold the key.
       </p>

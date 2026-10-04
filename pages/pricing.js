@@ -26,7 +26,7 @@ function PlanCard({ plan, btcUsd, current }) {
       {isCurrent ? (
         <p className="intel-plan-badge">Your plan</p>
       ) : plan.featured ? (
-        <p className="intel-plan-badge">PR review + automation</p>
+        <p className="intel-plan-badge">Higher cap</p>
       ) : (
         <p className="intel-plan-badge intel-plan-badge--quiet" aria-hidden="true">
           &nbsp;

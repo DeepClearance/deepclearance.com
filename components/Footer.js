@@ -45,9 +45,7 @@ export default function Footer() {
             </ul>
           </div>
         </nav>
-        <p className="footer-note">
-          Cited search. Lightning. Model Context Protocol (MCP).
-        </p>
+        <p className="footer-note">The suppression is the signal.</p>
       </div>
     </footer>
   );

@@ -1,5 +1,7 @@
 # Deep Clearance
 
+The suppression is the signal.
+
 Cited search over the public UAP, secrecy, and black-budget record.
 
 Connect at https://mcp.deepclearance.com/mcp with a paid Bearer key.
@@ -8,4 +10,4 @@ Plans: https://deepclearance.com/pricing/
 Docs: https://deepclearance.com/docs/
 
 Tools: search, get_passage, verify_claim, get_snapshot.
-The index is stored passages. It is not a live web fetch and not training-corpus canon.
+The index is stored passages. It is not a live web fetch.

@@ -18,7 +18,7 @@ import {
 const CONNECTOR_NAME = "Deep Clearance";
 
 function tierLabel(tier) {
-  if (tier === "developer") return "Developer";
+  if (tier === "developer") return "Control";
   if (tier === "trial") return "Trial";
   if (tier === "researcher") return "Researcher";
   return "";

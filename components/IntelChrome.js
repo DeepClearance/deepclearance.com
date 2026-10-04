@@ -6,13 +6,15 @@ export default function IntelChrome({
   kicker = "Deep Clearance",
   lede,
   heading = true,
+  subnav = true,
+  home = false,
   children,
 }) {
   return (
-    <section className="section intel-page">
+    <section className={`section intel-page${home ? " intel-page--home" : ""}`}>
       <div className="container">
-        <p className="fund-kicker">{kicker}</p>
-        <IntelSubnav />
+        {kicker ? <p className="fund-kicker">{kicker}</p> : null}
+        {subnav ? <IntelSubnav /> : null}
         {heading ? (
           <>
             <h1>{title}</h1>
