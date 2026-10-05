@@ -28,11 +28,12 @@ export default function HomePage() {
     <IntelChrome heading={false} kicker="" subnav={false} home>
       <article className="dc-hero">
         <div className="dc-hero__copy">
-          <h1>Official documents and talk transcripts.</h1>
+          <h1>Filings, files, books, and the talks about them.</h1>
           <p className="dc-hero__lede">
-            The postwar UAP record, the contractor layer, breakaway literature,
-            and the black budget. Pay with Lightning. Connect over Model
-            Context Protocol (MCP).
+            Court records, released files, patents, and books, with the
+            interviews on the postwar UAP record, the contractor layer, and the
+            black budget. Pay with Lightning. Connect over Model Context
+            Protocol (MCP).
           </p>
           <div className="hero-ctas">
             {hasKey ? (
@@ -90,7 +91,7 @@ export default function HomePage() {
           <article>
             <h3>Curated</h3>
             <p className="dc-file__note">
-              Written analysis, then the public documents.
+              The written layer. Filings, released files, patents, hearings, and books.
             </p>
             <ul>
               {INDEX_CURATED.map((item) => (
@@ -101,7 +102,7 @@ export default function HomePage() {
           <article>
             <h3>Record</h3>
             <p className="dc-file__note">
-              Talks and interviews that stay on the same subjects as the documents.
+              Interviews and shows on the same subjects as the documents.
             </p>
             <ul>
               {INDEX_RECORD.map((item) => (

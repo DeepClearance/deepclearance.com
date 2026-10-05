@@ -40,7 +40,7 @@ export default function DocsPage() {
         capture, suppression, and the reading of this record. <code>epstein_record</code>{" "}
         pins the court records and FOIA releases. <code>declassified_record</code>{" "}
         pins the government files and public patents. <code>shelf</code> pins
-        the public-domain books.
+        the books and compilations, including the deep state encyclopedia.
       </p>
       <p>
         Trial is 50 queries a day, Researcher 250, Control 500.{" "}
