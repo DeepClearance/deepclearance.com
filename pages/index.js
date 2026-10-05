@@ -31,7 +31,7 @@ export default function HomePage() {
           <p className="dc-hero__kicker">Deep Clearance</p>
           <h1>The suppression is the signal.</h1>
           <p className="dc-hero__lede">
-            Official documents and kept transcripts on the postwar UAP record,
+            Official documents and talk transcripts on the postwar UAP record,
             the contractor layer, breakaway literature, and the black budget.
             Pay with Lightning. Connect over Model Context Protocol (MCP).
           </p>
@@ -121,7 +121,7 @@ export default function HomePage() {
             <p className="dc-file__ref">REF: 19-8842-T</p>
             <h3>Record</h3>
             <p className="dc-file__note">
-              These are kept talks from the overlap.
+              Talks and interviews that stay on the same subjects as the documents.
             </p>
             <ul>
               {INDEX_RECORD.map((item) => (
