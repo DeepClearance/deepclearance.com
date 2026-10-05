@@ -4489,21 +4489,12 @@ html.auto-dark .site-brand__img--forced-dark {
   margin: 0 0 2.75rem;
 }
 
-.dc-hero__kicker {
-  margin: 0 0 0.85rem;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--seal);
-}
-
 .dc-hero h1 {
-  max-width: 11ch;
+  max-width: 16em;
   margin: 0 0 1rem;
-  font-size: clamp(2.7rem, 6.4vw, 4.6rem);
-  line-height: 0.98;
-  letter-spacing: -0.03em;
+  font-size: clamp(2rem, 4vw, 3.1rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
 .dc-hero__lede {
@@ -4512,17 +4503,6 @@ html.auto-dark .site-brand__img--forced-dark {
   color: var(--text-secondary);
   font-size: 1.05rem;
   line-height: 1.6;
-}
-
-.dc-hero__seal {
-  margin: 0;
-  justify-self: center;
-}
-
-.dc-hero__seal img {
-  display: block;
-  width: min(100%, 240px);
-  height: auto;
 }
 
 .dc-facts {
@@ -4558,24 +4538,6 @@ html.auto-dark .site-brand__img--forced-dark {
 }
 
 @media (min-width: 900px) {
-  .dc-hero {
-    grid-template-columns: minmax(0, 1.35fr) minmax(16rem, 0.7fr);
-  }
-
-  .dc-hero__copy {
-    grid-column: 1;
-    grid-row: 1;
-  }
-
-  .dc-hero__seal {
-    grid-column: 2;
-    grid-row: 1;
-  }
-
-  .dc-hero__seal img {
-    width: min(100%, 340px);
-  }
-
   .dc-facts {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
@@ -4630,15 +4592,6 @@ html.auto-dark .site-brand__img--forced-dark {
 .footer {
   background: #0c0b0a;
   border-top-color: var(--border);
-}
-
-.footer-note {
-  margin: 1.75rem 0 0;
-  padding-top: 1.15rem;
-  border-top: 1px solid var(--border);
-  color: var(--text-muted);
-  font-family: Georgia, "Iowan Old Style", Palatino, "Palatino Linotype", serif;
-  font-size: 1.15rem;
 }
 
 @media (max-width: 960px) {
@@ -4703,38 +4656,6 @@ html.auto-dark .site-brand__img--forced-dark {
 
 .dc-file {
   margin: 0 0 2.75rem;
-}
-
-.dc-file__bar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem 1.35rem;
-  margin: 0 0 1.35rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid var(--border);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--seal);
-}
-
-.dc-file__label {
-  margin: 0;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--seal);
-}
-
-.dc-file__ref {
-  margin: 0.2rem 0 0.65rem;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.06em;
-  color: var(--text-muted);
 }
 
 .dc-file h2 {

@@ -35,9 +35,9 @@ export default function DocsPage() {
         <code>fiction_contamination</code>, <code>disclosure_pressure</code>,{" "}
         <code>system</code>,{" "}
         <code>epstein_record</code>, <code>declassified_record</code>, or{" "}
-        <code>shelf</code>. Omit it to search the documents, the transcripts,
-        and the framework together. <code>system</code> pins the architecture,
-        the governance, and the analytical layers. <code>epstein_record</code>{" "}
+        <code>shelf</code>. Omit it to search the whole index.{" "}
+        <code>system</code> pins the analysis of
+        capture, suppression, and the reading of this record. <code>epstein_record</code>{" "}
         pins the court records and FOIA releases. <code>declassified_record</code>{" "}
         pins the government files and public patents. <code>shelf</code> pins
         the public-domain books.

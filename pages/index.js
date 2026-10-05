@@ -28,12 +28,11 @@ export default function HomePage() {
     <IntelChrome heading={false} kicker="" subnav={false} home>
       <article className="dc-hero">
         <div className="dc-hero__copy">
-          <p className="dc-hero__kicker">Deep Clearance</p>
-          <h1>The suppression is the signal.</h1>
+          <h1>Official documents and talk transcripts.</h1>
           <p className="dc-hero__lede">
-            Official documents and talk transcripts on the postwar UAP record,
-            the contractor layer, breakaway literature, and the black budget.
-            Pay with Lightning. Connect over Model Context Protocol (MCP).
+            The postwar UAP record, the contractor layer, breakaway literature,
+            and the black budget. Pay with Lightning. Connect over Model
+            Context Protocol (MCP).
           </p>
           <div className="hero-ctas">
             {hasKey ? (
@@ -57,14 +56,6 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
-        <figure className="dc-hero__seal">
-          <img
-            src="/assets/logo-white.png"
-            alt=""
-            width={608}
-            height={608}
-          />
-        </figure>
         <ul className="dc-facts" aria-label="Corpus at a glance">
           <li>
             <span className="dc-facts__k">Curated</span>
@@ -90,13 +81,6 @@ export default function HomePage() {
       </article>
 
       <section className="dc-file" aria-labelledby="intel-index-heading">
-        <div className="dc-file__bar">
-          <span>// ARCHIVE NODE 7A</span>
-          <span>SECURITY LEVEL 5</span>
-          <span>SIGINT FEED CH 89.7</span>
-        </div>
-        <p className="dc-file__label">INTEL SUMMARY</p>
-        <p className="dc-file__ref">CASE: ORION-7</p>
         <h2 id="intel-index-heading">What is in the index</h2>
         <p className="dc-file__lede">
           Every plan searches both layers. <Link href="/pricing/">Plans</Link>{" "}
@@ -104,11 +88,9 @@ export default function HomePage() {
         </p>
         <div className="dc-file__grid">
           <article>
-            <p className="dc-file__label">DOC-ID: DC-7721-A</p>
-            <p className="dc-file__ref">LEVEL: EYES ONLY</p>
             <h3>Curated</h3>
             <p className="dc-file__note">
-              The system, and the public documents.
+              Written analysis, then the public documents.
             </p>
             <ul>
               {INDEX_CURATED.map((item) => (
@@ -117,8 +99,6 @@ export default function HomePage() {
             </ul>
           </article>
           <article>
-            <p className="dc-file__label">TRANSCRIPT FRAG.</p>
-            <p className="dc-file__ref">REF: 19-8842-T</p>
             <h3>Record</h3>
             <p className="dc-file__note">
               Talks and interviews that stay on the same subjects as the documents.
@@ -130,16 +110,12 @@ export default function HomePage() {
             </ul>
           </article>
           <article>
-            <p className="dc-file__label">FILE FRAGMENT</p>
-            <p className="dc-file__ref">DC-7721-A-APP</p>
             <h3>Passage</h3>
             <p className="dc-file__note">
               A reply is a stored excerpt with the source attached.
             </p>
           </article>
           <article>
-            <p className="dc-file__label">COMMS INTERCEPT</p>
-            <p className="dc-file__ref">TS-SCI</p>
             <h3>Not in the index</h3>
             <ul>
               {INDEX_OUT.map((item) => (
@@ -162,7 +138,7 @@ export default function HomePage() {
           <span className="intel-flow__n">2</span>
           <div>
             <strong>Pay Lightning</strong>
-            <p>Sats in, access out. Same key on upgrade.</p>
+            <p>An upgrade keeps the same key.</p>
           </div>
         </li>
         <li>

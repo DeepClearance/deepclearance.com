@@ -45,7 +45,6 @@ export default function Footer() {
             </ul>
           </div>
         </nav>
-        <p className="footer-note">The suppression is the signal.</p>
       </div>
     </footer>
   );
