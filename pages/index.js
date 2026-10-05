@@ -28,7 +28,7 @@ export default function HomePage() {
     <IntelChrome heading={false} kicker="" subnav={false} home>
       <article className="dc-hero">
         <div className="dc-hero__copy">
-          <h1>Filings, files, books, and the talks about them.</h1>
+          <h1>The suppression is the signal.</h1>
           <p className="dc-hero__lede">
             Court records, released files, patents, and books, with the
             interviews on the postwar UAP record, the contractor layer, and the
