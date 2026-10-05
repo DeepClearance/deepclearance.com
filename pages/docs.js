@@ -7,6 +7,8 @@ const TOOLS = [
   ["get_passage", "The stored excerpt for a cite. Not a live crawl."],
   ["verify_claim", "Whether a stored excerpt supports a claim. The judge is not a source."],
   ["get_snapshot", "Replay a dated report. Free. A new date is a new tool call."],
+  ["corruption_lookup", "Corruption events by actor, jurisdiction, mechanism, and date. Each event keeps its own standard."],
+  ["pattern_query", "A network or mechanism, with the events and cited passages. Each claim keeps its own standard."],
 ];
 
 export default function DocsPage() {
@@ -34,13 +36,15 @@ export default function DocsPage() {
         <code>postwar_record</code>, <code>financial_control</code>,{" "}
         <code>fiction_contamination</code>, <code>disclosure_pressure</code>,{" "}
         <code>system</code>,{" "}
-        <code>epstein_record</code>, <code>declassified_record</code>, or{" "}
-        <code>shelf</code>. Omit it to search the whole index.{" "}
-        <code>system</code> pins the analysis of
-        capture, suppression, and the reading of this record. <code>epstein_record</code>{" "}
-        pins the court records and FOIA releases. <code>declassified_record</code>{" "}
-        pins the government files and public patents. <code>shelf</code> pins
-        the books and compilations, including the deep state encyclopedia.
+        <code>epstein_record</code>, <code>declassified_record</code>,{" "}
+        <code>shelf</code>, or <code>wire</code>. Omit it to search the whole
+        index. <code>system</code> pins the analysis of capture, suppression,
+        and the reading of this record. <code>epstein_record</code> pins the
+        court records and FOIA releases. <code>declassified_record</code> pins
+        the government files and public patents. <code>shelf</code> pins the
+        books and compilations, including the deep state encyclopedia.{" "}
+        <code>wire</code> pins agency and press articles stored as the outlet
+        published them.
       </p>
       <p>
         Trial is 50 queries a day, Researcher 250, Control 500.{" "}

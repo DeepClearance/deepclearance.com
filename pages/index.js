@@ -91,7 +91,7 @@ export default function HomePage() {
           <article>
             <h3>Curated</h3>
             <p className="dc-file__note">
-              The written layer. Filings, released files, patents, hearings, and books.
+              The written layer. Filings, released files, patents, hearings, books, and public wire articles.
             </p>
             <ul>
               {INDEX_CURATED.map((item) => (
