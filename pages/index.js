@@ -30,7 +30,7 @@ export default function HomePage() {
         <div className="dc-hero__copy">
           <h1>The suppression is the signal.</h1>
           <p className="dc-hero__lede">
-            Court records, released files, patents, and books, with the
+            Court records, released files, and patents, with the
             interviews on the postwar UAP record, the contractor layer, and the
             black budget. Pay with Lightning. Connect over Model Context
             Protocol (MCP).
@@ -91,7 +91,7 @@ export default function HomePage() {
           <article>
             <h3>Curated</h3>
             <p className="dc-file__note">
-              The written layer. Filings, released files, patents, hearings, books, and public wire articles.
+              The written layer. Filings, released files, patents, hearings, and public reporting.
             </p>
             <ul>
               {INDEX_CURATED.map((item) => (

@@ -42,10 +42,10 @@ export default function DocsPage() {
         of capture, suppression, and the reading of this record.{" "}
         <code>epstein_record</code> pins the court records and FOIA releases.{" "}
         <code>declassified_record</code> pins the government files and public
-        patents. <code>shelf</code> pins the books and compilations, including
-        the deep state encyclopedia. <code>industry_record</code> pins the UCSF
-        chemical, pharmaceutical, and fossil-fuel libraries. <code>wire</code>{" "}
-        pins agency and press articles stored as the outlet published them.
+        patents. <code>shelf</code> pins longer published works, and a reply
+        from that pin is a short passage. <code>industry_record</code> pins
+        chemical, pharmaceutical, and fossil-fuel industry documents.{" "}
+        <code>wire</code> pins agency releases and public reporting.
       </p>
       <p>
         Trial is 50 queries a day, Researcher 250, Control 500.{" "}
