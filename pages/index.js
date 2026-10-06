@@ -102,7 +102,7 @@ export default function HomePage() {
           <article>
             <h3>Record</h3>
             <p className="dc-file__note">
-              Interviews and shows on the same subjects as the documents.
+              The spoken layer. Short passages, with the source attached.
             </p>
             <ul>
               {INDEX_RECORD.map((item) => (
