@@ -9,7 +9,7 @@ export default function TermsPage() {
           <h1>Terms</h1>
           <p className="page-lede">
             Paying for Deep Clearance or signing in to use it is agreeing to
-            this page. Last updated 5 October 2026.
+            this page. Last updated 10 October 2026.
           </p>
         </header>
         <div className="content legal-content">
@@ -22,7 +22,9 @@ export default function TermsPage() {
           </p>
           <p>
             The index holds short passages from public records, filings,
-            interviews, and public reporting. Deep Clearance does not verify
+            interviews, public reporting, and excerpted shelf works (including
+            public-domain texts and archive material named on the homepage).
+            Deep Clearance does not verify
             those passages and does not endorse them. The tier and the
             standard on a result are the standing of that source. They are
             not a finding by the operator.
