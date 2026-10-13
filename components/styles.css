@@ -3238,7 +3238,7 @@ code {
   text-decoration: underline;
 }
 
-/* ── Intelligence product ── */
+/* Deep Clearance product */
 .intel-feature,
 .fund-feature,
 .cp-feature {
@@ -4359,6 +4359,29 @@ code {
 .account-ledger li span:first-child {
   flex: 0 0 4.5rem;
   font-variant-numeric: tabular-nums;
+}
+
+.account-usage {
+  width: 100%;
+  margin: 0.75rem 0 0;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.account-usage th,
+.account-usage td {
+  padding: 0.4rem 0.5rem 0.4rem 0;
+  border-top: 1px solid var(--border);
+  text-align: left;
+  font-weight: 400;
+}
+
+.account-usage th {
+  border-top: 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .intel-page .intel-fineprint {

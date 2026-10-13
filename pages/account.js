@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { MCP_URL, WORKER_ORIGIN, activeSku, upgradeSkus } from "../lib/api";
+import { usdApprox, useBtcUsd } from "../lib/btcUsd";
 import { mcpSnippets } from "../lib/mcpSnippets";
 import AuthCard from "../components/AuthCard";
 import CopyField from "../components/CopyField";
@@ -50,6 +51,184 @@ function expiryLabel(iso) {
   return `until ${date} (${wait})`;
 }
 
+function formatTs(ms) {
+  const d = new Date(Number(ms));
+  if (!Number.isFinite(d.getTime())) return "";
+  return d.toLocaleString("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
+function QueryBalance({ apiKey }) {
+  const btcUsd = useBtcUsd();
+  const [balance, setBalance] = useState(null);
+  const [usage, setUsage] = useState([]);
+  const [amount, setAmount] = useState("10000");
+  const [invoicedSats, setInvoicedSats] = useState(0);
+  const [invoice, setInvoice] = useState("");
+  const [note, setNote] = useState("");
+  const [paying, setPaying] = useState(false);
+
+  async function load() {
+    if (!apiKey) return;
+    const [balRes, useRes] = await Promise.all([
+      fetch(`${WORKER_ORIGIN}/api/balance?key=${encodeURIComponent(apiKey)}`),
+      fetch(`${WORKER_ORIGIN}/api/usage?key=${encodeURIComponent(apiKey)}&limit=20`),
+    ]);
+    if (balRes.ok) setBalance(await balRes.json());
+    else setNote("Balance is unavailable.");
+    if (useRes.ok) {
+      const data = await useRes.json();
+      setUsage(Array.isArray(data) ? data : []);
+    }
+  }
+
+  useEffect(() => {
+    if (!apiKey) return undefined;
+    load().catch(() => setNote("Balance is unavailable."));
+    return undefined;
+  }, [apiKey]);
+
+  useEffect(() => {
+    if (!apiKey || !invoice) return undefined;
+    const timer = setInterval(() => {
+      fetch(`${WORKER_ORIGIN}/api/topup`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          key: apiKey,
+          amount_sats: invoicedSats,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.balance_sats == null || data.invoice) return;
+          setInvoice("");
+          setNote("Payment confirmed.");
+          load().catch(() => {});
+        })
+        .catch(() => {});
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [apiKey, invoice, invoicedSats]);
+
+  async function onTopUp(event) {
+    event.preventDefault();
+    if (!apiKey) return;
+    setPaying(true);
+    setNote("");
+    try {
+      const res = await fetch(`${WORKER_ORIGIN}/api/topup`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          key: apiKey,
+          amount_sats: Math.floor(Number(amount) || 0),
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setNote(data.error || "Could not start the payment.");
+        return;
+      }
+      if (data.balance_sats != null && !data.invoice) {
+        setInvoice("");
+        setNote("Payment confirmed.");
+        await load();
+        return;
+      }
+      setInvoicedSats(Math.floor(Number(data.amount_sats) || Number(amount) || 0));
+      setInvoice(data.invoice || "");
+      setNote(data.invoice ? "Pay the invoice. This page updates when it settles." : "");
+    } catch {
+      setNote("Could not reach the Worker.");
+    } finally {
+      setPaying(false);
+    }
+  }
+
+  const remaining = balance?.estimated_queries_remaining;
+  const low = typeof remaining === "number" && remaining < 10;
+  const usd = balance ? usdApprox(balance.balance_sats, btcUsd) : "";
+
+  return (
+    <div className="intel-panel">
+      <h3>Credits</h3>
+      <p className="intel-plan-blurb">
+        Sats left on this key. Top up with Lightning. Each query spends sats
+        after it runs.
+      </p>
+      {low ? (
+        <p className="account-flash">
+          About {remaining} queries left at the recent rate.
+        </p>
+      ) : null}
+      <p className="intel-plan-meta">
+        {balance
+          ? `${Number(balance.balance_sats || 0).toLocaleString()} sats${usd ? ` (${usd})` : ""}`
+          : "Loading credits."}
+      </p>
+      <p className="intel-plan-meta">
+        {balance
+          ? `About ${remaining == null ? "unknown" : remaining.toLocaleString()} queries remaining.`
+          : ""}
+      </p>
+      <p className="intel-plan-meta">
+        {balance
+          ? `${Number(balance.total_sats_deposited || 0).toLocaleString()} sats deposited.`
+          : ""}
+      </p>
+      <form className="intel-fields" onSubmit={onTopUp}>
+        <label className="intel-field">
+          <p className="intel-panel-label">Top up (sats)</p>
+          <input
+            className="intel-input"
+            inputMode="numeric"
+            value={amount}
+            onChange={(event) => setAmount(event.target.value)}
+          />
+        </label>
+        <div className="home-ctas intel-ctas">
+          <button type="submit" className="btn btn-primary" disabled={paying || !apiKey}>
+            {paying ? "Starting" : "Pay with Lightning"}
+          </button>
+        </div>
+      </form>
+      {invoice ? <Field label="Invoice" value={invoice} copy="Copy invoice" /> : null}
+      {note ? <p className="intel-status">{note}</p> : null}
+      <h3>Recent queries</h3>
+      {usage.length ? (
+        <table className="account-usage">
+          <thead>
+            <tr>
+              <th>When</th>
+              <th>TypeSafe</th>
+              <th>Embed misses</th>
+              <th>Sats</th>
+            </tr>
+          </thead>
+          <tbody>
+            {usage.map((row) => (
+              <tr key={row.ts}>
+                <td>{formatTs(row.ts)}</td>
+                <td>{row.typesafe_calls}</td>
+                <td>{row.embed_misses}</td>
+                <td>{row.sats_deducted}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <p className="intel-plan-meta">No queries logged yet.</p>
+      )}
+    </div>
+  );
+}
+
 function Field({ label, value, copy }) {
   return (
     <div className="intel-field">
@@ -68,6 +247,7 @@ export default function AccountPage() {
   const [status, setStatus] = useState("");
   const [loginErr, setLoginErr] = useState("");
   const [busy, setBusy] = useState(false);
+  const [billingKey, setBillingKey] = useState("");
 
   async function refresh() {
     try {
@@ -122,6 +302,22 @@ export default function AccountPage() {
     };
   }, [user?.has_key]);
 
+  useEffect(() => {
+    if (!user?.has_key || key) return undefined;
+    let cancelled = false;
+    (async () => {
+      try {
+        const data = await fetchAccountKey();
+        if (!cancelled && data.key) setBillingKey(data.key);
+      } catch {
+        /* balance panel stays quiet until the key is available */
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [user?.has_key, key]);
+
   async function onNostr() {
     setLoginErr("");
     setBusy(true);
@@ -155,6 +351,7 @@ export default function AccountPage() {
   async function onLogout() {
     await logout();
     setKey("");
+    setBillingKey("");
     setConnector(null);
     setReferral(null);
     setUser(null);
@@ -288,6 +485,18 @@ export default function AccountPage() {
           ) : null}
 
           {user.has_key ? (
+            <QueryBalance apiKey={key || billingKey} />
+          ) : (
+            <div className="intel-panel">
+              <h3>Credits</h3>
+              <p className="intel-plan-blurb">
+                This account has no key yet. A key on the account is what the
+                credit balance and the Lightning top up use.
+              </p>
+            </div>
+          )}
+
+          {user.has_key ? (
             <div className="intel-panel intel-panel--ok">
               <h3>Claude connector</h3>
               <p className="intel-plan-blurb">
@@ -331,7 +540,7 @@ export default function AccountPage() {
                 <h3>Referral</h3>
                 <p className="intel-plan-blurb">
                   Send this link. First Lightning invoice gets 5,000 sats off.
-                  You get 5,000 sats of Intelligence credit when that invoice
+                  You get 5,000 sats of referral credit when that invoice
                   settles. Cannot combine with a coupon. Credit is not
                   withdrawable.
                 </p>

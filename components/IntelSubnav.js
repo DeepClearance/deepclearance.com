@@ -19,7 +19,7 @@ function active(pathname, href) {
 export default function IntelSubnav() {
   const router = useRouter();
   return (
-    <nav className="intel-subnav" aria-label="Intelligence">
+    <nav className="intel-subnav" aria-label="Deep Clearance">
       {ITEMS.map((item) => (
         <Link
           key={item.href}
