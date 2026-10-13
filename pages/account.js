@@ -206,7 +206,7 @@ function QueryBalance({ apiKey }) {
           <thead>
             <tr>
               <th>When</th>
-              <th>TypeSafe</th>
+              <th>Judge</th>
               <th>Embed misses</th>
               <th>Sats</th>
             </tr>

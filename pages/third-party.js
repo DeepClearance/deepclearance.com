@@ -24,9 +24,9 @@ export default function ThirdPartyPage() {
             The Worker, the key database, session storage, and the search index
             run on Cloudflare.
           </p>
-          <h2>TypeSafe</h2>
+          <h2>Judge</h2>
           <p>
-            An optional judge may score a packed excerpt. If that key is unset,
+            An optional outside judge may score a packed excerpt. If that key is unset,
             the judge is off and search still works.
           </p>
           <h2>Resend</h2>
