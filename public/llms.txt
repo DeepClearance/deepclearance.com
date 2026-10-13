@@ -1,0 +1,39 @@
+# Deep Clearance
+
+> Cited search over filings, released files, and interviews on the postwar UAP record, the contractor layer, and the black budget.
+
+Conspiracy-oriented tools treat a YouTube video and a declassified government filing as equivalent sources. Academic tools have the evidence discipline but won't touch the subject matter. Mainstream AI suppresses the interpretive framework the research depends on. Deep Clearance is built for the gap between those three failures.
+
+The index is stored passages. It is not a live web crawl. About 1,062,000 passages. Each passage carries two labels. Strength is what the passage can support, S1 to S4. Depth is how far the writeup goes, T1 to T4. A connected model is supposed to keep mixed labels apart, say when a label is missing, and stop when the index has no passage.
+
+Connect at https://mcp.deepclearance.com/mcp with a paid key. Cursor and other clients send Authorization: Bearer. Claude uses OAuth from https://deepclearance.com/account/. Login does not mint a free key.
+
+## Pages
+
+- [Home](https://deepclearance.com/): the product and why it exists
+- [Methodology](https://deepclearance.com/methodology/): S1 to S4, T1 to T4, and the model rules
+- [Docs](https://deepclearance.com/docs/): endpoint, tools, topic pins, and query caps
+- [Plans](https://deepclearance.com/pricing/): Trial, Researcher, and Control, paid with Lightning
+- [Checkout](https://deepclearance.com/subscribe/): start or change a plan
+- [Security](https://deepclearance.com/security/): how keys, checkout, and the index are bounded
+- [Support](https://deepclearance.com/support/): billing, keys, and checkout
+
+## Tools
+
+- search: cited passages. If the reply says the index had no passage, stop there. Optional source pin and date pin.
+- get_passage: the stored excerpt for a cite. Not a live crawl.
+- verify_claim: whether a stored excerpt supports a claim. The judge is not a source.
+- get_snapshot: replay a dated report. Free. Does not count against the daily cap.
+- corruption_lookup: corruption events by actor, jurisdiction, mechanism, and date. Each event keeps its own standard.
+- pattern_query: a network or mechanism, with the events and cited passages. Each claim keeps its own standard.
+- flag_gap: record a query that returned results but did not answer the question.
+
+gap_log lists those gaps by hit count. It is for the person maintaining the corpus.
+
+Trial is 50 queries a day, Researcher 250, Control 500.
+
+## Topic pins
+
+Pass source as one of origin_literature, secrecy_labels, contractor_layer, postwar_record, financial_control, fiction_contamination, disclosure_pressure, system, epstein_record, declassified_record, shelf, industry_record, or wire. Omit it to search the whole index.
+
+system is the analysis of capture, suppression, and the reading of this record. epstein_record is the court records and FOIA releases. declassified_record is the government files and public patents. shelf is longer published works, and a reply from that pin is a short passage. industry_record is chemical, pharmaceutical, and fossil-fuel industry documents. wire is agency releases and public reporting.

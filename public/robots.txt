@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://deepclearance.com/sitemap.xml
+
+# https://deepclearance.com/llms.txt

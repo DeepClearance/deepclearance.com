@@ -1,0 +1,16 @@
+{
+  "name": "deepclearance-website",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "export": "next build && rm -rf docs && mkdir -p docs && cp -a out/. docs/ && test -f CNAME && cp CNAME docs/CNAME && touch docs/.nojekyll"
+  },
+  "dependencies": {
+    "next": "^13.5.11",
+    "qrcode": "^1.5.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
