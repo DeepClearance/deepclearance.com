@@ -31,10 +31,10 @@ export default function HomePage() {
         <div className="dc-hero__copy">
           <h1>The suppression is the signal.</h1>
           <p className="dc-hero__lede">
-            The index is the paper. Industry files, court records,
-            declassified documents, and patents, with the books and talks kept
-            at their own strength. Pay with Lightning. Connect over Model
-            Context Protocol (MCP).
+            Find the document a company, a court, or an agency produced,
+            and read the excerpt. A book or an interview is marked as what
+            someone said. Pay with Lightning. Connect over Model Context
+            Protocol (MCP).
           </p>
           <div className="hero-ctas">
             {hasKey ? (
@@ -95,14 +95,15 @@ export default function HomePage() {
       <section className="dc-file" aria-labelledby="intel-index-heading">
         <h2 id="intel-index-heading">What is in the index</h2>
         <p className="dc-file__lede">
-          Every plan searches both layers. <Link href="/pricing/">Plans</Link>{" "}
+          Every plan searches the documents and the interviews.{" "}
+          <Link href="/pricing/">Plans</Link>{" "}
           differ by days and query cap.
         </p>
         <div className="dc-file__grid">
           <article>
             <h3>Curated</h3>
             <p className="dc-file__note">
-              The written layer. Industry files, court records, declassified documents, patents, and hearings.
+              Company files, court records, released government documents, patents, and hearings.
             </p>
             <ul>
               {INDEX_CURATED.map((item) => (
@@ -113,7 +114,7 @@ export default function HomePage() {
           <article>
             <h3>Record</h3>
             <p className="dc-file__note">
-              The spoken layer. Short passages, with the source attached.
+              Interviews and talks. A talk is not the document.
             </p>
             <ul>
               {INDEX_RECORD.map((item) => (

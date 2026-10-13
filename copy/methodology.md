@@ -40,4 +40,4 @@ A conclusion that needs several passages is only as strong as the weakest one it
 
 You get the passages, with both labels when the index has them. You can see what rests on a record and what rests on a guess, and you can see whether the writeup is staying with the papers, describing a network, making one argument, or stacking arguments.
 
-The bulk of the index is primary paper. Chemical, pharmaceutical, and fossil-fuel documents, court records, declassified files, and patents. Financial concentration, institutional capture, secrecy, contractor dependence, and the disclosure record are their own layers, and so are the books and the talks. New primary sources go in as they are acquired.
+Most of what you can search is documents from chemical companies, drug companies, and oil companies, plus court records, released government files, and patents. Writing about money, secrecy, contractors, and disclosure is included, and so are books and interviews. A result says which of those you are looking at. New documents go in as they are acquired.
