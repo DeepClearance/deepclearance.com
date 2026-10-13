@@ -31,9 +31,10 @@ export default function HomePage() {
         <div className="dc-hero__copy">
           <h1>The suppression is the signal.</h1>
           <p className="dc-hero__lede">
-            Find the document a company, a court, or an agency produced,
-            and read the excerpt. A book or an interview is marked as what
-            someone said. Pay with Lightning. Connect over Model Context
+            The public story is what a chemical company, a court, or an
+            agency was willing to say. The documents show what they did, and
+            what they spent to keep the rest quiet. Deep Clearance searches
+            those documents. Pay with Lightning. Connect over Model Context
             Protocol (MCP).
           </p>
           <div className="hero-ctas">

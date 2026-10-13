@@ -1,6 +1,6 @@
 # Deep Clearance
 
-> Find the document a company, a court, or an agency produced, and read the excerpt. A book or an interview is marked as what someone said.
+> The public story is what a chemical company, a court, or an agency was willing to say. The documents show what they did, and what they spent to keep the rest quiet. Deep Clearance searches those documents.
 
 Conspiracy-oriented tools treat a YouTube video and a declassified government filing as equivalent sources. Academic tools have the evidence discipline but won't touch the subject matter. Mainstream AI suppresses the interpretive framework the research depends on. Deep Clearance is built for the gap between those three failures.
 
