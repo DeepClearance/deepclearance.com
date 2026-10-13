@@ -1,6 +1,6 @@
 # Deep Clearance
 
-> Cited search over filings, released files, and interviews on the postwar UAP record, the contractor layer, and the black budget.
+> Cited search over industry files, court records, declassified documents, and the books and talks kept beside that paper.
 
 Conspiracy-oriented tools treat a YouTube video and a declassified government filing as equivalent sources. Academic tools have the evidence discipline but won't touch the subject matter. Mainstream AI suppresses the interpretive framework the research depends on. Deep Clearance is built for the gap between those three failures.
 

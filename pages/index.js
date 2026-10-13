@@ -31,10 +31,10 @@ export default function HomePage() {
         <div className="dc-hero__copy">
           <h1>The suppression is the signal.</h1>
           <p className="dc-hero__lede">
-            Court records, released files, and patents, with the
-            interviews on the postwar UAP record, the contractor layer, and the
-            black budget. Pay with Lightning. Connect over Model Context
-            Protocol (MCP).
+            The index is the paper. Industry files, court records,
+            declassified documents, and patents, with the books and talks kept
+            at their own strength. Pay with Lightning. Connect over Model
+            Context Protocol (MCP).
           </p>
           <div className="hero-ctas">
             {hasKey ? (
@@ -102,7 +102,7 @@ export default function HomePage() {
           <article>
             <h3>Curated</h3>
             <p className="dc-file__note">
-              The written layer. Filings, released files, patents, hearings, and public reporting.
+              The written layer. Industry files, court records, declassified documents, patents, and hearings.
             </p>
             <ul>
               {INDEX_CURATED.map((item) => (

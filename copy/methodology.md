@@ -40,4 +40,4 @@ A conclusion that needs several passages is only as strong as the weakest one it
 
 You get the passages, with both labels when the index has them. You can see what rests on a record and what rests on a guess, and you can see whether the writeup is staying with the papers, describing a network, making one argument, or stacking arguments.
 
-The index covers financial concentration, institutional capture, secrecy infrastructure, contractor revenue dependence on the DoD, UAP disclosure, declassified records, and Epstein financial networks. New primary sources go in as they are acquired.
+The bulk of the index is primary paper. Chemical, pharmaceutical, and fossil-fuel documents, court records, declassified files, and patents. Financial concentration, institutional capture, secrecy, contractor dependence, and the disclosure record are their own layers, and so are the books and the talks. New primary sources go in as they are acquired.
