@@ -46,8 +46,9 @@ export default function DocsPage() {
         <code>system</code>,{" "}
         <code>epstein_record</code>, <code>declassified_record</code>,{" "}
         <code>shelf</code>, <code>industry_record</code>, or <code>wire</code>.
-        Omit it to search the whole index. <code>system</code> pins the written
-        arguments about this record.{" "}
+        Omit it to search the whole index. <code>system</code> pins the research
+        on financial control, institutional power, technology suppression, and
+        the secrecy record.{" "}
         <code>epstein_record</code> pins the court records and FOIA releases.{" "}
         <code>declassified_record</code> pins the government files and public
         patents. <code>shelf</code> pins longer published works, and a reply
