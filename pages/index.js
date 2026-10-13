@@ -104,7 +104,7 @@ export default function HomePage() {
           <article>
             <h3>Curated</h3>
             <p className="dc-file__note">
-              Company files, court records, released government documents, patents, and hearings.
+              What companies, courts, and agencies wrote down, plus books.
             </p>
             <ul>
               {INDEX_CURATED.map((item) => (
@@ -115,7 +115,7 @@ export default function HomePage() {
           <article>
             <h3>Record</h3>
             <p className="dc-file__note">
-              Interviews and talks. A talk is not the document.
+              Interviews and talks, with the source named.
             </p>
             <ul>
               {INDEX_RECORD.map((item) => (

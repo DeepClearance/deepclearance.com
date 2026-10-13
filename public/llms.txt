@@ -36,4 +36,4 @@ Trial is 50 queries a day, Researcher 250, Control 500.
 
 Pass source as one of origin_literature, secrecy_labels, contractor_layer, postwar_record, financial_control, fiction_contamination, disclosure_pressure, system, epstein_record, declassified_record, shelf, industry_record, or wire. Omit it to search the whole index.
 
-system is the analysis of capture, suppression, and the reading of this record. epstein_record is the court records and FOIA releases. declassified_record is the government files and public patents. shelf is longer published works, and a reply from that pin is a short passage. industry_record is chemical, pharmaceutical, and fossil-fuel industry documents. wire is agency releases and public reporting.
+system is the written arguments about this record. epstein_record is the court records and FOIA releases. declassified_record is the government files and public patents. shelf is longer published works, and a reply from that pin is a short passage. industry_record is chemical, pharmaceutical, and fossil-fuel industry documents. wire is agency releases and public reporting.
