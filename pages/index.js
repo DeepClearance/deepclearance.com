@@ -3,7 +3,11 @@ import Link from "next/link";
 import { CORPUS, INDEX_CURATED, INDEX_OUT, INDEX_RECORD } from "../lib/api";
 import IntelChrome from "../components/IntelChrome";
 import { consumeSessionFromHash, fetchMe } from "../lib/auth";
-import { HOMEPAGE_METHODOLOGY } from "../lib/methodologyContent";
+import {
+  HOMEPAGE_CLOSE,
+  HOMEPAGE_LEDE,
+  HOMEPAGE_READING,
+} from "../lib/methodologyContent";
 
 export default function HomePage() {
   const [user, setUser] = useState(null);
@@ -30,13 +34,11 @@ export default function HomePage() {
       <article className="dc-hero">
         <div className="dc-hero__copy">
           <h1>The suppression is the signal.</h1>
-          <p className="dc-hero__lede">
-            The public story is what a chemical company, a court, or an
-            agency was willing to say. The documents show what they did, and
-            what they spent to keep the rest quiet. Deep Clearance searches
-            those documents. Pay with Lightning. Connect over Model Context
-            Protocol (MCP).
-          </p>
+          {HOMEPAGE_LEDE.map((text) => (
+            <p className="dc-hero__lede" key={text.slice(0, 32)}>
+              {text}
+            </p>
+          ))}
           <div className="hero-ctas">
             {hasKey ? (
               <Link href="/account/" className="btn btn-primary">
@@ -83,10 +85,17 @@ export default function HomePage() {
         </ul>
       </article>
 
-      <section className="dc-file" aria-labelledby="methodology-heading">
-        <h2 id="methodology-heading">Why this exists</h2>
-        {HOMEPAGE_METHODOLOGY.map((text) => (
-          <p key={text.slice(0, 40)}>{text}</p>
+      <section className="dc-read" aria-label="How Deep Clearance reads">
+        {HOMEPAGE_READING.map((block) => (
+          <div key={block.heading}>
+            <h2>{block.heading}</h2>
+            <p>{block.body}</p>
+          </div>
+        ))}
+        {HOMEPAGE_CLOSE.map((text) => (
+          <p className="dc-read__close" key={text.slice(0, 32)}>
+            {text}
+          </p>
         ))}
         <p>
           <Link href="/methodology/">Methodology</Link>

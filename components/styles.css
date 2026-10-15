@@ -3683,6 +3683,22 @@ code {
   margin: 0 0 1.5rem;
 }
 
+.intel-usage {
+  max-width: 40rem;
+  margin: 0.25rem 0 0;
+}
+
+.intel-usage h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.intel-usage p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0 0 0.85rem;
+}
+
 @media (min-width: 800px) {
   .intel-plan-grid {
     grid-template-columns: 1fr 1fr 1fr;
@@ -4522,10 +4538,14 @@ html.auto-dark .site-brand__img--forced-dark {
 
 .dc-hero__lede {
   max-width: 36rem;
-  margin: 0 0 1.5rem;
+  margin: 0 0 0.85rem;
   color: var(--text-secondary);
   font-size: 1.05rem;
   line-height: 1.6;
+}
+
+.dc-hero__copy .dc-hero__lede:last-of-type {
+  margin-bottom: 1.5rem;
 }
 
 .dc-facts {
@@ -4675,6 +4695,32 @@ html.auto-dark .site-brand__img--forced-dark {
 .site-brand--lockup .site-brand__img {
   height: auto;
   width: clamp(156px, 46vw, 248px);
+}
+
+.dc-read {
+  max-width: 40rem;
+  margin: 0 0 2.75rem;
+}
+
+.dc-read h2 {
+  margin: 1.75rem 0 0.45rem;
+  font-family: Georgia, "Iowan Old Style", Palatino, "Palatino Linotype", serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.dc-read > div:first-child h2 {
+  margin-top: 0;
+}
+
+.dc-read p {
+  margin: 0 0 0.85rem;
+  line-height: 1.6;
+}
+
+.dc-read__close:first-of-type {
+  margin-top: 1.35rem;
 }
 
 .dc-file {

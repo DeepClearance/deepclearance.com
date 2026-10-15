@@ -109,6 +109,23 @@ export default function PricingPage() {
           <PlanCard key={plan.id} plan={plan} btcUsd={btcUsd} current={current} />
         ))}
       </div>
+      <section className="intel-usage">
+        <h2>How usage works</h2>
+        <p>
+          You buy days on the index, and a daily set of queries. Trial is 50 a
+          day. Researcher is 250. Control is 500. The index is the same on
+          every plan.
+        </p>
+        <p>
+          A search, a stored passage, a claim check, a corruption lookup, or a
+          pattern query spends one. A snapshot replay is free. Each day starts
+          full at midnight UTC.
+        </p>
+        <p>
+          A longer term costs less per day. Moving up keeps your key, and the
+          invoice is the difference in sats.
+        </p>
+      </section>
     </IntelChrome>
   );
 }
