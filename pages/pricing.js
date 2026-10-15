@@ -112,14 +112,15 @@ export default function PricingPage() {
       <section className="intel-usage">
         <h2>How usage works</h2>
         <p>
-          You buy days on the index, and a daily set of queries. Trial is 50 a
-          day. Researcher is 250. Control is 500. The index is the same on
-          every plan.
+          You buy days on the index, and an included set of queries each day.
+          Trial is 50 a day. Researcher is 250. Control is 500. The index is
+          the same on every plan.
         </p>
         <p>
           A search, a stored passage, a claim check, a corruption lookup, or a
           pattern query spends one. A snapshot replay is free. Each day starts
-          full at midnight UTC.
+          full at midnight UTC. After that set is used, sats on the key pay
+          for more queries. A Lightning top up adds those sats.
         </p>
         <p>
           A longer term costs less per day. Moving up keeps your key, and the

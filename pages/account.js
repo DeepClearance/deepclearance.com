@@ -160,7 +160,8 @@ function QueryBalance({ apiKey }) {
       <h3>Credits</h3>
       <p className="intel-plan-blurb">
         Sats left on this key. Top up with Lightning. Each query spends sats
-        after it runs.
+        after it runs. Once the day's included queries are used, the balance
+        keeps the key working.
       </p>
       {low ? (
         <p className="account-flash">

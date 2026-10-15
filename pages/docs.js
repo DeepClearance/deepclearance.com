@@ -57,8 +57,9 @@ export default function DocsPage() {
         <code>wire</code> pins agency releases and public reporting.
       </p>
       <p>
-        Trial is 50 queries a day, Researcher 250, Control 500.{" "}
-        <code>get_snapshot</code> does not count. <Link href="/pricing/">Plans</Link>{" "}
+        Trial includes 50 queries a day, Researcher 250, Control 500. A top up
+        pays for queries after that set is used. <code>get_snapshot</code> does
+        not count. <Link href="/pricing/">Plans</Link>{" "}
         and <Link href="/account/">Account</Link> hold the key.
       </p>
     </IntelChrome>
