@@ -2,30 +2,30 @@ The suppression is the signal.
 
 Mainstream AI hedges. Forums don't cite. The documents take months to read.
 
-Deep Clearance is a research system built to read institutional power the way it actually operates. Under the index sits a complete analytical framework, and it runs on every question you ask.
+The public story is what a chemical company, a court, or an agency was willing to say. The documents show what they did, and what they spent to keep the rest quiet. Deep Clearance searches those documents and returns the passage with the source still on it.
 
-It knows what kind of evidence it's holding.
+Four standards, and they stay apart.
 
-Four evidence standards, each scoped to its own domain. Forensic analysis of covert networks doesn't demand the paper trail those networks exist to destroy. An institution's description of itself is logged as a claim, not a fact. Every conclusion carries the strength of its weakest source.
+S1 is the page that shows the act. A dollar figure in a filing is S1 for that figure. A press release is S4, evidence that they said it, until another page shows the act. A conclusion stays as strong as the weakest passage it needed.
 
-It reads the label before the claim.
+The branded subject gets read second.
 
-When a subject has been branded misinformation, deplatformed, or litigated into silence, the system examines the suppression first. Who funded it, when it started, what shape it took. Then it reads the evidence.
+When a subject has been branded misinformation, deplatformed, or litigated into silence, the first pass is the suppression itself. Who paid for it, when it started, and what form it took come before the documents.
 
-It tests itself.
+The way it could be wrong is written down.
 
-Every major claim sits in a register with the conditions that would downgrade it. Every major thesis has its strongest counter-hypothesis written down. The system knows where it could be wrong and tells you.
+Major claims carry the conditions that would downgrade them, and the strongest account on the other side sits with the thesis.
 
-It knows where AI is filtered.
+A hedge marks what the training protects.
 
-Language models are trained toward the managed consensus. Deep Clearance tracks where the hedges fall, because a hedge marks what's being protected.
+Language models are trained toward the managed consensus. Deep Clearance tracks where those hedges fall.
 
-It sees the whole pattern.
+The domains already point at each other.
 
-Financial capture from 1812 to Jekyll Island. Seven historians using seven methods who arrive at the same suppression sequence. Patent secrecy orders, enforcement asymmetry, trillions in unsupported Pentagon adjustments, and the accounting standard written to keep them dark. Every domain is cross-referenced to the others.
+Financial capture from 1812 to Jekyll Island. Seven historians, seven methods, and the same suppression sequence. Patent secrecy orders, enforcement asymmetry, trillions in unsupported Pentagon adjustments, and the accounting standard written to keep them dark.
 
-Over a million primary source passages. One standard of evidence. Every answer sourced.
-
-The cost of suppression just went up.
+Over a million primary source passages, under one standard, with the source attached to the answer.
 
 Pay with Lightning. Connect over MCP.
+
+The cost of suppression just went up.

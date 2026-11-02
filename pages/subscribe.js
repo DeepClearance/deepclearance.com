@@ -522,7 +522,10 @@ export default function SubscribePage() {
   };
 
   return (
-    <IntelChrome title="Checkout">
+    <IntelChrome
+      title="Checkout"
+      lede="Sign in with GitHub or Nostr. A settled Lightning invoice puts the key on that login. An upgrade keeps the same key."
+    >
       <div className="intel-split">
         <article className={`intel-plan${preview ? " intel-plan--coupon" : ""}`}>
           {preview ? (

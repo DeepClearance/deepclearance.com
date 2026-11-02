@@ -9,6 +9,7 @@ import SiteBrand from "./SiteBrand";
 
 const NAV_LINKS = [
   { href: "/", title: "Overview" },
+  { href: "/methodology/", title: "Methodology" },
   { href: "/docs/", title: "Docs" },
   { href: "/pricing/", title: "Plans" },
 ];

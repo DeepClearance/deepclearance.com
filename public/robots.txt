@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /account/
 
 Sitemap: https://deepclearance.com/sitemap.xml
 

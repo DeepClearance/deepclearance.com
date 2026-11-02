@@ -15,17 +15,16 @@ export default function MyApp({ Component, pageProps }) {
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="describedby" href="/llms.txt" />
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-          crossOrigin="anonymous"
-          referrerPolicy="no-referrer"
-        />
       </Head>
       <SiteHead />
       <Layout>
+        <a className="skip-link" href="#content">
+          Skip to content
+        </a>
         <NavBar />
-        <Component {...pageProps} />
+        <main id="content" className="layout-main">
+          <Component {...pageProps} />
+        </main>
         <Footer />
       </Layout>
     </>

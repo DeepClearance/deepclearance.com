@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { MCP_URL } from "../lib/api";
+import CopyField from "../components/CopyField";
 import IntelChrome from "../components/IntelChrome";
 import { DOCS_METHODOLOGY } from "../lib/methodologyContent";
 
@@ -16,12 +17,12 @@ export default function DocsPage() {
   return (
     <IntelChrome
       title="Docs"
-      lede="Connect with a paid key. Unauthenticated tool calls fail."
+      lede="The endpoint below goes in the model you already use. Tool calls need a paid key. Unauthenticated calls fail."
     >
+      <CopyField value={MCP_URL} label="Copy endpoint" />
       <p>
-        Endpoint <code>{MCP_URL}</code>. Cursor and other clients send{" "}
-        <code>Authorization: Bearer</code>. Claude uses OAuth from Account.
-        Login does not mint a free key.
+        Cursor and other clients send <code>Authorization: Bearer</code>. Claude
+        uses OAuth from Account. Login does not mint a free key.
       </p>
       <h2>{DOCS_METHODOLOGY.title}</h2>
       {DOCS_METHODOLOGY.paragraphs.map((text) => (
@@ -31,10 +32,11 @@ export default function DocsPage() {
         <Link href="/methodology/">Methodology</Link>
       </p>
       <h2>Tools</h2>
-      <ul>
+      <ul className="dc-tools">
         {TOOLS.map(([name, text]) => (
           <li key={name}>
-            <code>{name}</code>. {text}
+            <code>{name}</code>
+            <span>{text}</span>
           </li>
         ))}
       </ul>

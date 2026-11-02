@@ -101,8 +101,8 @@ export default function PricingPage() {
     <IntelChrome title="Plans">
       <p className="intel-lede">
         {current
-          ? "You already have a plan. Checkout will not sell you the same one again. Higher tiers are upgrades: same key, sat difference only."
-          : "Trial is a week on the index, 50 queries a day. Longer plans buy more days and more queries. Same key when you upgrade."}
+          ? "You already have a plan. Checkout will not sell you the same one again. An upgrade keeps the key and charges the difference in sats."
+          : "Trial is 15,000 sats for 7 days and 50 queries a day. Researcher is 250 queries a day. Control is 500. Every plan searches the same index. An upgrade keeps your key, and the invoice is the difference in sats."}
       </p>
       <div className="intel-plan-grid">
         {PLANS.map((plan) => (

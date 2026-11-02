@@ -5,9 +5,32 @@ import IntelChrome from "../components/IntelChrome";
 import { consumeSessionFromHash, fetchMe } from "../lib/auth";
 import {
   HOMEPAGE_CLOSE,
+  HOMEPAGE_FAQ,
   HOMEPAGE_LEDE,
   HOMEPAGE_READING,
 } from "../lib/methodologyContent";
+
+function PrimaryAction({ hasKey, signedIn }) {
+  if (hasKey) {
+    return (
+      <Link href="/account/" className="btn btn-primary">
+        Open Account
+      </Link>
+    );
+  }
+  if (signedIn) {
+    return (
+      <Link href="/subscribe/" className="btn btn-primary">
+        Checkout
+      </Link>
+    );
+  }
+  return (
+    <Link href="/subscribe/?plan=trial" className="btn btn-primary">
+      Start the seven-day trial
+    </Link>
+  );
+}
 
 export default function HomePage() {
   const [user, setUser] = useState(null);
@@ -40,19 +63,7 @@ export default function HomePage() {
             </p>
           ))}
           <div className="hero-ctas">
-            {hasKey ? (
-              <Link href="/account/" className="btn btn-primary">
-                Open Account
-              </Link>
-            ) : signedIn ? (
-              <Link href="/subscribe/" className="btn btn-primary">
-                Checkout
-              </Link>
-            ) : (
-              <Link href="/subscribe/?plan=trial" className="btn btn-primary">
-                Start trial
-              </Link>
-            )}
+            <PrimaryAction hasKey={hasKey} signedIn={signedIn} />
             <Link href="/pricing/" className="btn btn-secondary">
               See plans
             </Link>
@@ -63,11 +74,11 @@ export default function HomePage() {
         </div>
         <ul className="dc-facts" aria-label="Corpus at a glance">
           <li>
-            <span className="dc-facts__k">Curated</span>
+            <span className="dc-facts__k">Documents</span>
             <span>{CORPUS.curated}</span>
           </li>
           <li>
-            <span className="dc-facts__k">Record</span>
+            <span className="dc-facts__k">Interviews</span>
             <span>{CORPUS.record}</span>
           </li>
           <li>
@@ -97,17 +108,18 @@ export default function HomePage() {
             {text}
           </p>
         ))}
-        <p>
+        <div className="dc-next">
+          <PrimaryAction hasKey={hasKey} signedIn={signedIn} />
           <Link href="/methodology/">Methodology</Link>
-        </p>
+        </div>
       </section>
 
       <section className="dc-file" aria-labelledby="intel-index-heading">
         <h2 id="intel-index-heading">What is in the index</h2>
         <p className="dc-file__lede">
-          Every plan searches the documents and the interviews.{" "}
-          <Link href="/pricing/">Plans</Link>{" "}
-          differ by days and query cap.
+          Every plan searches the same documents and the same interviews. A plan
+          buys days and a daily cap on queries. The cards are a sample of a
+          larger index. <Link href="/pricing/">See the plans</Link>.
         </p>
         <div className="dc-file__grid">
           <article>
@@ -149,7 +161,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      <ol className="intel-flow">
+      <section className="dc-start" aria-labelledby="dc-start-heading">
+        <h2 id="dc-start-heading">How to start</h2>
+        <ol className="intel-flow">
         <li>
           <span className="intel-flow__n">1</span>
           <div>
@@ -175,10 +189,21 @@ export default function HomePage() {
           <span className="intel-flow__n">4</span>
           <div>
             <strong>Ask</strong>
-            <p>The answer, with the source attached.</p>
+            <p>The passage comes back with the source attached.</p>
           </div>
         </li>
-      </ol>
+        </ol>
+      </section>
+
+      <section className="dc-faq" aria-labelledby="dc-faq-heading">
+        <h2 id="dc-faq-heading">Before you pay</h2>
+        {HOMEPAGE_FAQ.map((item) => (
+          <div key={item.q}>
+            <h3>{item.q}</h3>
+            <p>{item.a}</p>
+          </div>
+        ))}
+      </section>
     </IntelChrome>
   );
 }

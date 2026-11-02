@@ -1926,7 +1926,7 @@ code {
 
 @media (min-width: 640px) {
   .footer-nav {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 16rem));
   }
 }
 
@@ -4551,19 +4551,23 @@ html.auto-dark .site-brand__img--forced-dark {
 .dc-facts {
   grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.1rem 1.25rem;
+  grid-template-columns: 1fr;
+  gap: 0;
   margin: 0;
-  padding: 1.2rem 0 0;
+  padding: 0.35rem 0 0;
   list-style: none;
   border-top: 1px solid var(--border);
 }
 
 .dc-facts li {
   display: flex;
-  flex-direction: column;
-  gap: 0.28rem;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
   min-width: 0;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--border);
 }
 
 .dc-facts__k {
@@ -4580,9 +4584,14 @@ html.auto-dark .site-brand__img--forced-dark {
   line-height: 1.35;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 720px) and (max-width: 959px) {
   .dc-facts {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: 1fr 1fr;
+    gap: 0 1.5rem;
+  }
+
+  .dc-facts li:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
   }
 }
 
@@ -4723,6 +4732,30 @@ html.auto-dark .site-brand__img--forced-dark {
   margin-top: 1.35rem;
 }
 
+.dc-faq {
+  max-width: 40rem;
+  margin: 2.75rem 0 0;
+}
+
+.dc-faq h2 {
+  margin: 0 0 1.15rem;
+  font-family: Georgia, "Iowan Old Style", Palatino, "Palatino Linotype", serif;
+  font-size: clamp(1.8rem, 3vw, 2.35rem);
+  font-weight: 500;
+}
+
+.dc-faq h3 {
+  margin: 1.35rem 0 0.35rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.dc-faq p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
 .dc-file {
   margin: 0 0 2.75rem;
 }
@@ -4778,5 +4811,134 @@ html.auto-dark .site-brand__img--forced-dark {
 @media (min-width: 800px) {
   .dc-file__grid {
     grid-template-columns: 1fr 1fr;
+    align-items: start;
   }
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: 0;
+  z-index: 2000;
+  transform: translateY(-120%);
+  background: var(--cream);
+  color: var(--ground);
+  padding: 0.55rem 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+#content {
+  scroll-margin-top: 5.25rem;
+}
+
+@media (min-width: 961px) {
+  .intel-page .fund-kicker,
+  .intel-subnav {
+    display: none;
+  }
+
+  .dc-hero {
+    grid-template-columns: minmax(0, 1fr) 17rem;
+    column-gap: 3.25rem;
+    align-items: center;
+  }
+
+  .dc-facts {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+    margin-top: 0;
+    padding: 0.15rem 0 0.15rem 1.5rem;
+    border-top: 0;
+    border-left: 1px solid var(--border);
+    border-bottom: 0;
+  }
+
+  .dc-facts li {
+    border-bottom: 0;
+    padding: 0.55rem 0;
+  }
+}
+
+.dc-next {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.dc-read {
+  margin-bottom: 0;
+}
+
+.dc-file,
+.dc-start,
+.dc-faq {
+  margin-top: 2.5rem;
+  margin-bottom: 0;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--border);
+}
+
+.dc-start h2,
+.dc-file h2,
+.dc-faq h2 {
+  font-family: Georgia, "Iowan Old Style", Palatino, "Palatino Linotype", serif;
+  font-weight: 500;
+}
+
+.dc-start h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.8rem, 3vw, 2.35rem);
+}
+
+.intel-flow li {
+  border-radius: 0;
+  align-items: flex-start;
+}
+
+.intel-page .intel-copy {
+  max-width: 42rem;
+}
+
+.dc-tools {
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  max-width: 42rem;
+  border-top: 1px solid var(--border);
+}
+
+.dc-tools li {
+  display: grid;
+  justify-items: start;
+  gap: 0.35rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.dc-tools code {
+  color: var(--cream);
+  font-size: 0.95rem;
+}
+
+.dc-tools span {
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.intel-copy-value,
+.nav-toggle {
+  border-radius: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--seal);
+  outline-offset: 3px;
 }
