@@ -1,4 +1,4 @@
-The suppression is the signal.
+Understand the system. Challenge the narrative.
 
 Mainstream AI hedges. Forums don't cite. The documents take months to read.
 

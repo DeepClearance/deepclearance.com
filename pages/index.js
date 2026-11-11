@@ -56,7 +56,7 @@ export default function HomePage() {
     <IntelChrome heading={false} kicker="" subnav={false} home>
       <article className="dc-hero">
         <div className="dc-hero__copy">
-          <h1>The suppression is the signal.</h1>
+          <h1>Understand the system. Challenge the narrative.</h1>
           {HOMEPAGE_LEDE.map((text) => (
             <p className="dc-hero__lede" key={text.slice(0, 32)}>
               {text}
@@ -116,6 +116,12 @@ export default function HomePage() {
 
       <section className="dc-file" aria-labelledby="intel-index-heading">
         <h2 id="intel-index-heading">What is in the index</h2>
+        <p className="dc-file__lede">
+          Test claims about institutions against filings, official documents and
+          public records, distinguish documentation from inference, and identify
+          evidentiary limits. Institutional intelligence; public records;
+          economic and political context.
+        </p>
         <p className="dc-file__lede">
           Every plan searches the same documents and the same interviews. A plan
           buys days and a daily cap on queries. The cards are a sample of a
