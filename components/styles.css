@@ -5118,3 +5118,19 @@ html.auto-dark .site-brand__img--forced-dark {
     padding: 0 40px;
   }
 }
+
+/* Outline button: the Charcoal border (1.4:1) and Cream label read as
+   disabled. Label is White, border Cream #C4BAB0; size and weight come from
+   the shared 19px bold button rule. */
+.btn-outline {
+  border-color: var(--text-secondary);
+  color: var(--cream);
+}
+
+/* Homepage stat labels (Documents, Interviews, Passages, Pay, Connect):
+   10.9px #888888 becomes 13px Cream #C4BAB0. */
+.dc-facts__k {
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  color: var(--text-secondary);
+}
