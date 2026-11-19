@@ -3,8 +3,9 @@ import Link from "next/link";
 export default function SiteBrand({ className = "", onClick, lockup = false }) {
   const lightSrc = lockup ? "/assets/lockup.png" : "/assets/logo.png";
   const darkSrc = lockup ? "/assets/lockup-white.png" : "/assets/logo-white.png";
-  const width = lockup ? 1711 : 608;
-  const height = lockup ? 392 : 608;
+  // Official Deep Clearance v13 rasters (lockup 1024x220, mark 1024x535).
+  const width = 1024;
+  const height = lockup ? 220 : 535;
   return (
     <Link
       href="/"
