@@ -11,6 +11,7 @@ export default function SiteBrand({ className = "", onClick, lockup = false }) {
       href="/"
       className={`site-brand${lockup ? " site-brand--lockup" : ""}${className ? ` ${className}` : ""}`}
       onClick={onClick}
+      aria-label="Deep Clearance"
     >
       <img
         src={lightSrc}
@@ -27,6 +28,20 @@ export default function SiteBrand({ className = "", onClick, lockup = false }) {
         height={height}
         aria-hidden="true"
       />
+      {lockup ? (
+        // Below 320 px the lockup tagline is too small to read, so the header
+        // shows the official v13 mark plus the name in Inter Semibold.
+        <span className="site-brand__compact" aria-hidden="true">
+          <img
+            src="/assets/logo-white.png"
+            alt=""
+            className="site-brand__compact-mark"
+            width={1024}
+            height={535}
+          />
+          <span className="site-brand__compact-name">Deep Clearance</span>
+        </span>
+      ) : null}
     </Link>
   );
 }

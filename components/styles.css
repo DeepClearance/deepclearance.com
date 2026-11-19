@@ -5065,3 +5065,35 @@ html.auto-dark .site-brand__img--forced-dark {
   font-size: 1.15rem;
   font-weight: 600;
 }
+
+/* Header brand below 320 px: v13 mark plus the name in Inter Semibold
+   (MM 2026-11-19, option a). At 320 px and up the full v13 lockup shows. */
+.site-brand__compact {
+  display: none;
+}
+
+@media (max-width: 319.98px) {
+  .site-brand--lockup .site-brand__img,
+  html.auto-dark .site-brand--lockup .site-brand__img {
+    display: none;
+  }
+
+  .site-brand--lockup .site-brand__compact {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .site-brand__compact-mark {
+    display: block;
+    width: auto;
+    height: 24px;
+  }
+
+  .site-brand__compact-name {
+    color: var(--cream);
+    font-size: 1.05rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+}
