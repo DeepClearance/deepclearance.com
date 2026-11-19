@@ -102,7 +102,7 @@ export default function PricingPage() {
       <p className="intel-lede">
         {current
           ? "You already have a plan. Checkout will not sell you the same one again. An upgrade keeps the key and charges the difference in sats."
-          : "Trial is 15,000 sats for 7 days and 50 queries a day. Researcher is 250 queries a day. Control is 500. Every plan searches the same index. An upgrade keeps your key, and the invoice is the difference in sats."}
+          : "Every plan searches the same index. Plans differ only in days and daily queries. Trial is 15,000 sats for 7 days and 50 queries a day. Researcher is 250 queries a day. Control is 500. An upgrade keeps your key, and the invoice is the difference in sats."}
       </p>
       <div className="intel-plan-grid">
         {PLANS.map((plan) => (

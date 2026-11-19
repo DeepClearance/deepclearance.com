@@ -5057,3 +5057,11 @@ html.auto-dark .site-brand__img--forced-dark {
 .intel-plan-badge--quiet {
   border-color: transparent;
 }
+
+/* Homepage action line under the lede (charter primary action). */
+.dc-hero__action {
+  margin: 0 0 1.25rem;
+  color: var(--cream);
+  font-size: 1.15rem;
+  font-weight: 600;
+}

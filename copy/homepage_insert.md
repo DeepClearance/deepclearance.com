@@ -1,31 +1,29 @@
-The suppression is the signal.
+Understand the system. Challenge the narrative.
 
-Mainstream AI hedges. Forums don't cite. The documents take months to read.
+Deep Clearance is institutional intelligence for independent thinkers. It searches filings, court documents, released government files, patents, and interviews, and returns the passage with its source attached.
 
-The public story is what a chemical company, a court, or an agency was willing to say. The documents show what they did, and what they spent to keep the rest quiet. Deep Clearance searches those documents and returns the passage with the source still on it.
+Every passage is labeled for what it can support. Documentation stays apart from inference, and the limits of the evidence are written down.
 
-Four standards, and they stay apart.
+Read the source. Draw your own conclusion.
 
-S1 is the page that shows the act. A dollar figure in a filing is S1 for that figure. A press release is S4, evidence that they said it, until another page shows the act. A conclusion stays as strong as the weakest passage it needed.
+Four standards, kept apart.
 
-The branded subject gets read second.
+S1 is a page that shows the act. A dollar figure in a filing is S1 for that figure. A press release is S4. It shows that they said it, until another page shows the act. A conclusion is only as strong as the weakest passage it needs.
 
-When a subject has been branded misinformation, deplatformed, or litigated into silence, the first pass is the suppression itself. Who paid for it, when it started, and what form it took come before the documents.
+Contested subjects are read in full.
 
-The way it could be wrong is written down.
+When a subject has been labeled misinformation, deplatformed, or taken to court, Deep Clearance reads that history first: who acted, when, and in what form, as the documents show it.
 
-Major claims carry the conditions that would downgrade them, and the strongest account on the other side sits with the thesis.
+Every major claim says how it could fail.
 
-A hedge marks what the training protects.
+Major claims carry the conditions that would downgrade them. The strongest account on the other side sits beside the thesis.
 
-Language models are trained toward the managed consensus. Deep Clearance tracks where those hedges fall.
+One index, many institutions.
 
-The domains already point at each other.
+Federal Reserve transcripts from the 2008 crisis, the federal accounting standard for classified defense spending, patents, contracts, and court documents sit in one index. One question can cross all of them.
 
-Financial capture from 1812 to Jekyll Island. Seven historians, seven methods, and the same suppression sequence. Patent secrecy orders, enforcement asymmetry, trillions in unsupported Pentagon adjustments, and the accounting standard written to keep them dark.
-
-Over a million primary source passages, under one standard, with the source attached to the answer.
+About 1,476,000 primary source passages, under one standard, each with its source attached.
 
 Pay with Lightning. Connect over MCP.
 
-The cost of suppression just went up.
+Power leaves a paper trail.

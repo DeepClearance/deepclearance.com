@@ -4,6 +4,7 @@ import { CORPUS, INDEX_CURATED, INDEX_OUT, INDEX_RECORD } from "../lib/api";
 import IntelChrome from "../components/IntelChrome";
 import { consumeSessionFromHash, fetchMe } from "../lib/auth";
 import {
+  HOMEPAGE_ACTION,
   HOMEPAGE_CLOSE,
   HOMEPAGE_FAQ,
   HOMEPAGE_LEDE,
@@ -56,19 +57,20 @@ export default function HomePage() {
     <IntelChrome heading={false} kicker="" subnav={false} home>
       <article className="dc-hero">
         <div className="dc-hero__copy">
-          <h1>The suppression is the signal.</h1>
+          <h1>Understand the system. Challenge the narrative.</h1>
           {HOMEPAGE_LEDE.map((text) => (
             <p className="dc-hero__lede" key={text.slice(0, 32)}>
               {text}
             </p>
           ))}
+          <p className="dc-hero__action">{HOMEPAGE_ACTION}</p>
           <div className="hero-ctas">
             <PrimaryAction hasKey={hasKey} signedIn={signedIn} />
-            <Link href="/pricing/" className="btn btn-secondary">
-              See plans
+            <Link href="/methodology/" className="btn btn-secondary">
+              How evidence is weighed
             </Link>
-            <Link href="/docs/" className="btn btn-outline">
-              Docs
+            <Link href="/pricing/" className="btn btn-outline">
+              See plans
             </Link>
           </div>
         </div>
@@ -110,7 +112,7 @@ export default function HomePage() {
         ))}
         <div className="dc-next">
           <PrimaryAction hasKey={hasKey} signedIn={signedIn} />
-          <Link href="/methodology/">Methodology</Link>
+          <Link href="/about/">About Deep Clearance</Link>
         </div>
       </section>
 
@@ -134,7 +136,7 @@ export default function HomePage() {
             </ul>
           </article>
           <article>
-            <h3>Record</h3>
+            <h3>Interviews</h3>
             <p className="dc-file__note">
               Interviews and talks, with the source named.
             </p>
