@@ -5105,3 +5105,16 @@ html.auto-dark .site-brand__img--forced-dark {
   border: 1px solid var(--seal);
   color: var(--cream);
 }
+
+/* Header gutter matches .container (20px, 40px from 768px), and the menu
+   button no longer pulls 8px into it, so it sits clear of the edge and
+   any scrollbar gutter. */
+.nav-toggle {
+  margin-right: 0;
+}
+
+@media (min-width: 768px) {
+  .nav-bar {
+    padding: 0 40px;
+  }
+}
