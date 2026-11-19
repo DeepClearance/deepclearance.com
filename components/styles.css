@@ -4538,6 +4538,37 @@ html.auto-dark .site-brand__img--forced-dark {
   transform: none;
 }
 
+/* White on #FF0033 is 3.96:1. That passes WCAG AA only as large text
+   (bold, 14pt = 18.67px or more), so every button and CTA label is bold
+   at 19px. Overrides the smaller sizes on .btn-large, copy, pay, auth,
+   coupon and the nav sign-in link. */
+.btn,
+.btn-large,
+.intel-copy-btn,
+.intel-pay-btn,
+.auth-card__btn,
+.intel-coupon-row .btn,
+.intel-plan .btn {
+  font-size: 1.1875rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+/* The nav sign-in link is white on the dark bar (19.3:1), not on red, so
+   it keeps the nav link size and only matches the bold weight. */
+.nav-signin {
+  font-weight: 700 !important;
+}
+
+/* Step numbers sit on the red as well, so they get the same large bold
+   treatment and a circle big enough to hold it. */
+.intel-flow__n {
+  width: 2.25rem;
+  height: 2.25rem;
+  font-size: 1.1875rem;
+  font-weight: 700;
+}
+
 .intel-page h1 {
   font-family: inherit;
   font-weight: 700;
