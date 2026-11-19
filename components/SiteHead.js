@@ -115,7 +115,7 @@ export default function SiteHead() {
       <meta property="og:description" content={shareDescription} />
       <meta property="og:url" content={meta.url} />
       <meta property="og:image" content={OG_IMAGE} />
-      <meta property="og:image:alt" content="Deep Clearance. The suppression is the signal." />
+      <meta property="og:image:alt" content="Deep Clearance" />
       <meta property="og:image:type" content="image/png" />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
@@ -123,7 +123,7 @@ export default function SiteHead() {
       <meta name="twitter:title" content={shareTitle} />
       <meta name="twitter:description" content={shareDescription} />
       <meta name="twitter:image" content={OG_IMAGE} />
-      <meta name="twitter:image:alt" content="Deep Clearance. The suppression is the signal." />
+      <meta name="twitter:image:alt" content="Deep Clearance" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
