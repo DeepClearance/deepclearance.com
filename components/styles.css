@@ -22,8 +22,8 @@ body {
     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
     Cantarell, sans-serif;
   line-height: 1.6;
-  color: #efe6da;
-  background-color: #100f0d;
+  color: #ffffff;
+  background-color: #0e0e0d;
   overflow-x: hidden;
 }
 
@@ -66,22 +66,26 @@ p {
 
 /* Colors */
 :root {
-  --seal: #e2aea4;
-  --seal-fill: #8f3f3a;
-  --seal-fill-hover: #a34b45;
-  --cream: #efe6da;
-  --ground: #100f0d;
+  /* Deep Clearance kit values: media kit 2026-11-05 palette and
+     brands/deep-clearance.md L56-L60. Accent #FF0033 Deep Red,
+     ground #0E0E0D, text White, secondary Cream #C4BAB0, meta #888888,
+     lines Charcoal #2B2B2E. The kit has no hover red, so hover keeps it. */
+  --seal: #ff0033;
+  --seal-fill: #ff0033;
+  --seal-fill-hover: #ff0033;
+  --cream: #ffffff;
+  --ground: #0e0e0d;
   --raised: #181714;
   --bitcoin-orange: var(--seal);
   --text-primary: var(--cream);
-  --text-secondary: #d4c8ba;
-  --text-muted: #a89b8d;
+  --text-secondary: #c4bab0;
+  --text-muted: #888888;
   --background: var(--ground);
   --code-background: #1c1a17;
-  --border: #3c362e;
+  --border: #2b2b2e;
   --hover: #241f1b;
   --panel-warm: var(--raised);
-  --panel-warm-border: #3c362e;
+  --panel-warm-border: #2b2b2e;
 }
 
 /* Container */
@@ -4413,7 +4417,7 @@ code {
 /* Clearance sheet. Dark ground, cream type, seal red. */
 
 .nav {
-  background: rgba(16, 15, 13, 0.94);
+  background: rgba(14, 14, 13, 0.94);
   border-bottom-color: var(--border);
 }
 
@@ -4478,7 +4482,7 @@ html.auto-dark .site-brand__img--forced-dark {
 
 .btn-secondary {
   background: transparent;
-  border-color: #6d5e56;
+  border-color: #888888;
   color: var(--cream);
 }
 
@@ -4653,22 +4657,22 @@ html.auto-dark .site-brand__img--forced-dark {
   html.auto-dark .nav-toggle,
   html.auto-dark .nav-toggle.is-open {
     color-scheme: only dark;
-    background-color: #100f0d;
+    background-color: #0e0e0d;
     background-repeat: no-repeat;
     background-position: center;
     background-size: 18px 14px;
-    color: #efe6da;
-    border-color: #efe6da;
+    color: #ffffff;
+    border-color: #ffffff;
   }
 
   .nav-toggle,
   html.auto-dark .nav-toggle {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 14'%3E%3Cpath fill='none' stroke='%23EFE6DA' stroke-width='2' stroke-linecap='square' d='M1 2h16M1 7h16M1 12h16'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 14'%3E%3Cpath fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='square' d='M1 2h16M1 7h16M1 12h16'/%3E%3C/svg%3E");
   }
 
   .nav-toggle.is-open,
   html.auto-dark .nav-toggle.is-open {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 14'%3E%3Cpath fill='none' stroke='%23EFE6DA' stroke-width='2' stroke-linecap='square' d='M2 1l14 12M16 1L2 13'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 14'%3E%3Cpath fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='square' d='M2 1l14 12M16 1L2 13'/%3E%3C/svg%3E");
   }
 
   .nav-toggle__bars,
