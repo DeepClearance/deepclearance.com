@@ -108,15 +108,15 @@ p {
   --seal-fill-hover: #ff0033;
   --cream: #ffffff;
   --ground: #0e0e0d;
-  --raised: #2B2B2E; /* kit Charcoal, Josh 2026-11-19 */
+  --raised: #131516; /* MM working pick 2026-11-19, UNVERIFIED: no source doc names a surface */
   --bitcoin-orange: var(--seal);
   --text-primary: var(--cream);
   --text-secondary: #c4bab0;
   --text-muted: #888888;
   --background: var(--ground);
-  --code-background: #2B2B2E;
+  --code-background: #131516;
   --border: #2b2b2e;
-  --hover: #2B2B2E;
+  --hover: #131516;
   --panel-warm: var(--raised);
   --panel-warm-border: #2b2b2e;
 }
@@ -4691,14 +4691,14 @@ html.auto-dark .site-brand__img--forced-dark {
 .support-form input,
 .support-form textarea,
 .support-form select {
-  background: #2B2B2E;
+  background: #131516;
   color: var(--cream);
   border-color: var(--border);
 }
 
 .intel-plan-toggle button.is-on,
 .intel-sku.is-on {
-  background: #2B2B2E;
+  background: #131516;
   border-color: var(--seal-fill);
   color: var(--cream);
 }
@@ -4750,7 +4750,7 @@ html.auto-dark .site-brand__img--forced-dark {
   }
 
   .nav-links {
-    background: #2B2B2E;
+    background: #131516;
     border-bottom-color: var(--border);
     box-shadow: none;
   }
