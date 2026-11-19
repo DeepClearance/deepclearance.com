@@ -1957,7 +1957,7 @@ code {
 
 .footer-nav {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: 1.75rem 2rem;
 }
 
@@ -3967,7 +3967,7 @@ code {
   display: block;
   width: 220px;
   height: 220px;
-  max-width: none;
+  max-width: 100%;
   image-rendering: pixelated;
 }
 
@@ -4590,7 +4590,7 @@ html.auto-dark .site-brand__img--forced-dark {
 
 .dc-hero {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: 1.75rem 3rem;
   align-items: center;
   margin: 0 0 2.75rem;
@@ -5009,4 +5009,36 @@ html.auto-dark .site-brand__img--forced-dark {
 :focus-visible {
   outline: 2px solid var(--seal);
   outline-offset: 3px;
+}
+
+/* Phone widths (320 to 420 px). The page must never be wider than the
+   screen: a wider page lets iOS pan sideways and shifts the fixed header,
+   so the menu button slides off and text runs past the edge. */
+.nav-logo {
+  min-width: 0;
+  flex: 0 1 auto;
+}
+
+.nav-toggle {
+  flex-shrink: 0;
+}
+
+.intel-page,
+.layout-main {
+  overflow-wrap: break-word;
+}
+
+.intel-qr {
+  width: min(220px, calc(100vw - 4.5rem));
+  min-width: 0;
+}
+
+.intel-qr img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+}
+
+.intel-qr__fallback {
+  width: 100%;
 }
