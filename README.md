@@ -1,6 +1,14 @@
 # Deep Clearance
 
-Public site for the cited search index. GitHub Pages on `deepclearance.com`.
+<p align="center">
+  <img src=".github/brand/DC_og_1200x630_v13_lockup.png" alt="Deep Clearance" width="640">
+</p>
+
+Understand the system. Challenge the narrative.
+
+Public website for [deepclearance.com](https://deepclearance.com), served from GitHub Pages.
+
+Deep Clearance is primary-source research on institutional power. Every answer comes with the source attached.
 
 The Worker, keys, and ingest live in the private repo `DeepClearance/deepclearance-intel`. This repository does not contain the corpus.
 
