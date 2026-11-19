@@ -6,9 +6,9 @@ Strength and depth stay separate. Strength is what that passage can support. Dep
 
 S1 means the page shows the act. The dollar figure in a filing is S1 for that figure. An audit finding is S1 for the finding the report states. A lawsuit is S1 for what it alleges. A judgment, or another page that records the act, is what shows the act happened. A reason someone gives for the act stays S4 unless a different passage backs that reason.
 
-S2 means the papers force the conclusion even though no single page names it. If the contracts on the record cannot work unless someone is coordinating them, that coordination is S2.
+S2 means the papers force the conclusion even though no single page names it. If the contracts in the index cannot work unless someone is coordinating them, that coordination is S2.
 
-S3 means it fits, and the record does not rule it out, but the record does not force it either. Motive, intent, and hidden coordination usually land here.
+S3 means it fits, and the documents do not rule it out, but they do not force it either. Motive, intent, and hidden coordination usually land here.
 
 S4 means they said it about themselves. A press release, an official statement, or testimony about their own plans shows that they said it. Whether the account is true is a different passage.
 
@@ -38,6 +38,6 @@ A conclusion that needs several passages is only as strong as the weakest one it
 
 ## What a query returns
 
-You get the passages, with both labels when the index has them. You can see what rests on a record and what rests on a guess, and you can see whether the writeup is staying with the papers, describing a network, making one argument, or stacking arguments.
+You get the passages, with both labels when the index has them. You can see what rests on a document and what rests on a guess, and you can see whether the writeup is staying with the papers, describing a network, making one argument, or stacking arguments.
 
 Most of what you can search is documents from chemical companies, drug companies, and oil companies, plus court records, released government files, and patents. Writing about money, secrecy, contractors, and disclosure is included, and so are books and interviews. A result says which of those you are looking at. New documents go in as they are acquired.

@@ -17,7 +17,7 @@ export default function DocsPage() {
   return (
     <IntelChrome
       title="Docs"
-      lede="The endpoint below goes in the model you already use. Tool calls need a paid key. Unauthenticated calls fail."
+      lede="Add this endpoint to the model you already use. Tool calls need a paid key. Calls without one fail."
     >
       <CopyField value={MCP_URL} label="Copy endpoint" />
       <p>

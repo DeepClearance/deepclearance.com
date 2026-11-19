@@ -11,6 +11,9 @@ export default function Footer() {
             <h4>Product</h4>
             <ul>
               <li>
+                <Link href="/about/">About</Link>
+              </li>
+              <li>
                 <Link href="/docs/">Docs</Link>
               </li>
               <li>

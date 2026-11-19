@@ -1,5 +1,37 @@
 /* Deep Clearance Website Styles - Minimal/Technical Design */
 
+/* Inter, as the DC media kit sets it (Bold headlines, Semibold subheads,
+   Medium labels, Regular body). Self-hosted, SIL OFL 1.1 (fonts/inter/LICENSE.txt),
+   so no third-party font request. Latin subset first; full file only for
+   other glyphs. */
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/inter/InterVariable-Latin.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+20BF, U+2122, U+2154,
+    U+2190-2193, U+2212, U+2215, U+2260, U+2264-2265, U+2308-2309, U+25B8,
+    U+25BE, U+2605-2606, U+26A1, U+2713, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/inter/InterVariable.woff2") format("woff2");
+  unicode-range:
+    U+0100-0130, U+0132-0151, U+0154-02BA, U+02BD-02C5, U+02C7-02D9, U+02DB,
+    U+02DD-0303, U+0305-0307, U+0309-0328, U+032A-1FFF, U+2070-20AB,
+    U+20AD-20BE, U+20C0-2121, U+2123-2153, U+2155-218F, U+2194-2211,
+    U+2213-2214, U+2216-225F, U+2261-2263, U+2266-2307, U+230A-25B7,
+    U+25B9-25BD, U+25BF-2604, U+2607-26A0, U+26A2-2712, U+2714-FEFE,
+    U+FF00-FFFC, U+FFFE-10FFFF;
+}
+
 /* Reset and Base */
 * {
   margin: 0;
@@ -19,11 +51,11 @@ img {
 
 body {
   font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
-    Cantarell, sans-serif;
+    Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, sans-serif;
   line-height: 1.6;
-  color: #efe6da;
-  background-color: #100f0d;
+  color: #ffffff;
+  background-color: #0e0e0d;
   overflow-x: hidden;
 }
 
@@ -40,6 +72,7 @@ h6 {
 }
 
 h1 {
+  font-weight: 700;
   font-size: clamp(1.85rem, 5vw, 2.5rem);
   margin-bottom: 1.25rem;
 }
@@ -66,22 +99,26 @@ p {
 
 /* Colors */
 :root {
-  --seal: #e2aea4;
-  --seal-fill: #8f3f3a;
-  --seal-fill-hover: #a34b45;
-  --cream: #efe6da;
-  --ground: #100f0d;
-  --raised: #181714;
+  /* Deep Clearance kit values: media kit 2026-11-05 palette and
+     brands/deep-clearance.md L56-L60. Accent #FF0033 Deep Red,
+     ground #0E0E0D, text White, secondary Cream #C4BAB0, meta #888888,
+     lines Charcoal #2B2B2E. The kit has no hover red, so hover keeps it. */
+  --seal: #ff0033;
+  --seal-fill: #ff0033;
+  --seal-fill-hover: #ff0033;
+  --cream: #ffffff;
+  --ground: #0e0e0d;
+  --raised: #131516; /* MM working pick 2026-11-19, UNVERIFIED: no source doc names a surface */
   --bitcoin-orange: var(--seal);
   --text-primary: var(--cream);
-  --text-secondary: #d4c8ba;
-  --text-muted: #a89b8d;
+  --text-secondary: #c4bab0;
+  --text-muted: #888888;
   --background: var(--ground);
-  --code-background: #1c1a17;
-  --border: #3c362e;
-  --hover: #241f1b;
+  --code-background: #131516;
+  --border: #2b2b2e;
+  --hover: #131516;
   --panel-warm: var(--raised);
-  --panel-warm-border: #3c362e;
+  --panel-warm-border: #2b2b2e;
 }
 
 /* Container */
@@ -1920,7 +1957,7 @@ code {
 
 .footer-nav {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: 1.75rem 2rem;
 }
 
@@ -3930,7 +3967,7 @@ code {
   display: block;
   width: 220px;
   height: 220px;
-  max-width: none;
+  max-width: 100%;
   image-rendering: pixelated;
 }
 
@@ -4413,7 +4450,7 @@ code {
 /* Clearance sheet. Dark ground, cream type, seal red. */
 
 .nav {
-  background: rgba(16, 15, 13, 0.94);
+  background: rgba(14, 14, 13, 0.94);
   border-bottom-color: var(--border);
 }
 
@@ -4478,7 +4515,7 @@ html.auto-dark .site-brand__img--forced-dark {
 
 .btn-secondary {
   background: transparent;
-  border-color: #6d5e56;
+  border-color: #888888;
   color: var(--cream);
 }
 
@@ -4501,9 +4538,40 @@ html.auto-dark .site-brand__img--forced-dark {
   transform: none;
 }
 
+/* White on #FF0033 is 3.96:1. That passes WCAG AA only as large text
+   (bold, 14pt = 18.67px or more), so every button and CTA label is bold
+   at 19px. Overrides the smaller sizes on .btn-large, copy, pay, auth,
+   coupon and the nav sign-in link. */
+.btn,
+.btn-large,
+.intel-copy-btn,
+.intel-pay-btn,
+.auth-card__btn,
+.intel-coupon-row .btn,
+.intel-plan .btn {
+  font-size: 1.1875rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+/* The nav sign-in link is white on the dark bar (19.3:1), not on red, so
+   it keeps the nav link size and only matches the bold weight. */
+.nav-signin {
+  font-weight: 700 !important;
+}
+
+/* Step numbers sit on the red as well, so they get the same large bold
+   treatment and a circle big enough to hold it. */
+.intel-flow__n {
+  width: 2.25rem;
+  height: 2.25rem;
+  font-size: 1.1875rem;
+  font-weight: 700;
+}
+
 .intel-page h1 {
-  font-family: Georgia, "Iowan Old Style", Palatino, "Palatino Linotype", serif;
-  font-weight: 500;
+  font-family: inherit;
+  font-weight: 700;
 }
 
 .intel-page a:not(.btn) {
@@ -4522,7 +4590,7 @@ html.auto-dark .site-brand__img--forced-dark {
 
 .dc-hero {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: 1.75rem 3rem;
   align-items: center;
   margin: 0 0 2.75rem;
@@ -4623,14 +4691,14 @@ html.auto-dark .site-brand__img--forced-dark {
 .support-form input,
 .support-form textarea,
 .support-form select {
-  background: #141311;
+  background: #131516;
   color: var(--cream);
   border-color: var(--border);
 }
 
 .intel-plan-toggle button.is-on,
 .intel-sku.is-on {
-  background: #2a1715;
+  background: #131516;
   border-color: var(--seal-fill);
   color: var(--cream);
 }
@@ -4642,7 +4710,7 @@ html.auto-dark .site-brand__img--forced-dark {
 }
 
 .footer {
-  background: #0c0b0a;
+  background: var(--ground);
   border-top-color: var(--border);
 }
 
@@ -4653,22 +4721,22 @@ html.auto-dark .site-brand__img--forced-dark {
   html.auto-dark .nav-toggle,
   html.auto-dark .nav-toggle.is-open {
     color-scheme: only dark;
-    background-color: #100f0d;
+    background-color: #0e0e0d;
     background-repeat: no-repeat;
     background-position: center;
     background-size: 18px 14px;
-    color: #efe6da;
-    border-color: #efe6da;
+    color: #ffffff;
+    border-color: #ffffff;
   }
 
   .nav-toggle,
   html.auto-dark .nav-toggle {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 14'%3E%3Cpath fill='none' stroke='%23EFE6DA' stroke-width='2' stroke-linecap='square' d='M1 2h16M1 7h16M1 12h16'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 14'%3E%3Cpath fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='square' d='M1 2h16M1 7h16M1 12h16'/%3E%3C/svg%3E");
   }
 
   .nav-toggle.is-open,
   html.auto-dark .nav-toggle.is-open {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 14'%3E%3Cpath fill='none' stroke='%23EFE6DA' stroke-width='2' stroke-linecap='square' d='M2 1l14 12M16 1L2 13'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 14'%3E%3Cpath fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='square' d='M2 1l14 12M16 1L2 13'/%3E%3C/svg%3E");
   }
 
   .nav-toggle__bars,
@@ -4682,7 +4750,7 @@ html.auto-dark .site-brand__img--forced-dark {
   }
 
   .nav-links {
-    background: #141311;
+    background: #131516;
     border-bottom-color: var(--border);
     box-shadow: none;
   }
@@ -4713,7 +4781,7 @@ html.auto-dark .site-brand__img--forced-dark {
 
 .dc-read h2 {
   margin: 1.75rem 0 0.45rem;
-  font-family: Georgia, "Iowan Old Style", Palatino, "Palatino Linotype", serif;
+  font-family: inherit;
   font-size: 1.35rem;
   font-weight: 500;
   line-height: 1.25;
@@ -4739,7 +4807,7 @@ html.auto-dark .site-brand__img--forced-dark {
 
 .dc-faq h2 {
   margin: 0 0 1.15rem;
-  font-family: Georgia, "Iowan Old Style", Palatino, "Palatino Linotype", serif;
+  font-family: inherit;
   font-size: clamp(1.8rem, 3vw, 2.35rem);
   font-weight: 500;
 }
@@ -4762,7 +4830,7 @@ html.auto-dark .site-brand__img--forced-dark {
 
 .dc-file h2 {
   margin: 0.15rem 0 0.55rem;
-  font-family: Georgia, "Iowan Old Style", Palatino, "Palatino Linotype", serif;
+  font-family: inherit;
   font-size: clamp(1.8rem, 3vw, 2.35rem);
   font-weight: 500;
 }
@@ -4889,7 +4957,7 @@ html.auto-dark .site-brand__img--forced-dark {
 .dc-start h2,
 .dc-file h2,
 .dc-faq h2 {
-  font-family: Georgia, "Iowan Old Style", Palatino, "Palatino Linotype", serif;
+  font-family: inherit;
   font-weight: 500;
 }
 
@@ -4941,4 +5009,128 @@ html.auto-dark .site-brand__img--forced-dark {
 :focus-visible {
   outline: 2px solid var(--seal);
   outline-offset: 3px;
+}
+
+/* Phone widths (320 to 420 px). The page must never be wider than the
+   screen: a wider page lets iOS pan sideways and shifts the fixed header,
+   so the menu button slides off and text runs past the edge. */
+.nav-logo {
+  min-width: 0;
+  flex: 0 1 auto;
+}
+
+.nav-toggle {
+  flex-shrink: 0;
+}
+
+.intel-page,
+.layout-main {
+  overflow-wrap: break-word;
+}
+
+.intel-qr {
+  width: min(220px, calc(100vw - 4.5rem));
+  min-width: 0;
+}
+
+.intel-qr img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+}
+
+.intel-qr__fallback {
+  width: 100%;
+}
+
+/* Plan badge: red 12px text on the card was 4.5:1 or less and hard to read.
+   Text is now white (kit White) and the red moves to a 1px border. */
+.intel-plan-badge {
+  align-self: flex-start;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid var(--seal);
+  color: var(--cream);
+  font-size: 0.78rem;
+  line-height: 1.3;
+}
+
+.intel-plan-badge--quiet {
+  border-color: transparent;
+}
+
+/* Homepage action line under the lede (charter primary action). */
+.dc-hero__action {
+  margin: 0 0 1.25rem;
+  color: var(--cream);
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+/* Header brand below 320 px: v13 mark plus the name in Inter Semibold
+   (MM 2026-11-19, option a). At 320 px and up the full v13 lockup shows. */
+.site-brand__compact {
+  display: none;
+}
+
+@media (max-width: 319.98px) {
+  .site-brand--lockup .site-brand__img,
+  html.auto-dark .site-brand--lockup .site-brand__img {
+    display: none;
+  }
+
+  .site-brand--lockup .site-brand__compact {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .site-brand__compact-mark {
+    display: block;
+    width: auto;
+    height: 24px;
+  }
+
+  .site-brand__compact-name {
+    color: var(--cream);
+    font-size: 1.05rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+}
+
+/* Test-network notice (shown only off mainnet): was a light #fff4e0 box.
+   Uses the existing surface, text and accent tokens. */
+.network-warning {
+  background: var(--raised);
+  border: 1px solid var(--seal);
+  color: var(--cream);
+}
+
+/* Header gutter matches .container (20px, 40px from 768px), and the menu
+   button no longer pulls 8px into it, so it sits clear of the edge and
+   any scrollbar gutter. */
+.nav-toggle {
+  margin-right: 0;
+}
+
+@media (min-width: 768px) {
+  .nav-bar {
+    padding: 0 40px;
+  }
+}
+
+/* Outline button: the Charcoal border (1.4:1) and Cream label read as
+   disabled. Label is White, border Cream #C4BAB0; size and weight come from
+   the shared 19px bold button rule. */
+.btn-outline {
+  border-color: var(--text-secondary);
+  color: var(--cream);
+}
+
+/* Homepage stat labels (Documents, Interviews, Passages, Pay, Connect):
+   10.9px #888888 becomes 13px Cream #C4BAB0. */
+.dc-facts__k {
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  color: var(--text-secondary);
 }

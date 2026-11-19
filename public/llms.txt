@@ -1,8 +1,6 @@
 # Deep Clearance
 
-> The public story is what a chemical company, a court, or an agency was willing to say. The documents show what they did, and what they spent to keep the rest quiet. Deep Clearance searches those documents.
-
-Conspiracy-oriented tools treat a YouTube video and a declassified government filing as equivalent sources. Academic tools have the evidence discipline but won't touch the subject matter. Mainstream AI suppresses the interpretive framework the research depends on. Deep Clearance is built for the gap between those three failures.
+> Understand the system. Challenge the narrative. Deep Clearance is institutional intelligence from public documents. It tests claims about institutions against filings, official documents, and other public documents, keeps documentation apart from inference, and says where the evidence stops.
 
 The index is stored passages. It is not a live web crawl. About 1,476,000 passages. Each passage carries two labels. Strength is what the passage can support, S1 to S4. Depth is how far the writeup goes, T1 to T4. A connected model is supposed to keep mixed labels apart, say when a label is missing, and stop when the index has no passage.
 
@@ -11,6 +9,7 @@ Connect at https://mcp.deepclearance.com/mcp with a paid key. Cursor and other c
 ## Pages
 
 - [Home](https://deepclearance.com/): the product and why it exists
+- [About](https://deepclearance.com/about/): mission, vision, and what Deep Clearance will not do
 - [Methodology](https://deepclearance.com/methodology/): S1 to S4, T1 to T4, and the model rules
 - [Docs](https://deepclearance.com/docs/): endpoint, tools, topic pins, and query caps
 - [Plans](https://deepclearance.com/pricing/): Trial, Researcher, and Control, paid with Lightning

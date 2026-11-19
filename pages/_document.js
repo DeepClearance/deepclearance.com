@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <meta name="theme-color" content="#100f0d" />
+        <meta name="theme-color" content="#0e0e0d" />
         <meta name="color-scheme" content="dark" />
         {/* Chrome Auto Dark (Android / force-dark) inverts CSS, not images.
             prefers-color-scheme is OS dark, not this. Probe from

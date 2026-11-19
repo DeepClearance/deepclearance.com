@@ -16,12 +16,12 @@ export default function TermsPage() {
           <h2>What this covers</h2>
           <p>
             These terms are for Deep Clearance and this website. Deep Clearance
-            is cited search over a collected public record. It is not a news
+            is institutional intelligence drawn from public documents. It is not a news
             wire, a classification authority, or legal, financial, or
             intelligence advice.
           </p>
           <p>
-            The index holds short passages from public records, filings,
+            The index holds short passages from public documents, filings,
             interviews, public reporting, and excerpted shelf works (including
             public-domain texts and archive material named on the homepage).
             Deep Clearance does not verify
