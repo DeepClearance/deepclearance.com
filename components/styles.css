@@ -116,7 +116,7 @@ p {
   --background: var(--ground);
   --code-background: #131516;
   --border: #2b2b2e;
-  --hover: #241f1b;
+  --hover: #131516;
   --panel-warm: var(--raised);
   --panel-warm-border: #2b2b2e;
 }
@@ -4698,7 +4698,7 @@ html.auto-dark .site-brand__img--forced-dark {
 
 .intel-plan-toggle button.is-on,
 .intel-sku.is-on {
-  background: #2a1715;
+  background: #131516;
   border-color: var(--seal-fill);
   color: var(--cream);
 }
@@ -4710,7 +4710,7 @@ html.auto-dark .site-brand__img--forced-dark {
 }
 
 .footer {
-  background: #0c0b0a;
+  background: var(--ground);
   border-top-color: var(--border);
 }
 
@@ -5096,4 +5096,12 @@ html.auto-dark .site-brand__img--forced-dark {
     font-weight: 600;
     white-space: nowrap;
   }
+}
+
+/* Test-network notice (shown only off mainnet): was a light #fff4e0 box.
+   Uses the existing surface, text and accent tokens. */
+.network-warning {
+  background: var(--raised);
+  border: 1px solid var(--seal);
+  color: var(--cream);
 }
