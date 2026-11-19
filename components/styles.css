@@ -108,13 +108,13 @@ p {
   --seal-fill-hover: #ff0033;
   --cream: #ffffff;
   --ground: #0e0e0d;
-  --raised: #181714;
+  --raised: #131516; /* MM working pick 2026-11-19, UNVERIFIED: no source doc names a surface */
   --bitcoin-orange: var(--seal);
   --text-primary: var(--cream);
   --text-secondary: #c4bab0;
   --text-muted: #888888;
   --background: var(--ground);
-  --code-background: #1c1a17;
+  --code-background: #131516;
   --border: #2b2b2e;
   --hover: #241f1b;
   --panel-warm: var(--raised);
@@ -4691,7 +4691,7 @@ html.auto-dark .site-brand__img--forced-dark {
 .support-form input,
 .support-form textarea,
 .support-form select {
-  background: #141311;
+  background: #131516;
   color: var(--cream);
   border-color: var(--border);
 }
@@ -4750,7 +4750,7 @@ html.auto-dark .site-brand__img--forced-dark {
   }
 
   .nav-links {
-    background: #141311;
+    background: #131516;
     border-bottom-color: var(--border);
     box-shadow: none;
   }
