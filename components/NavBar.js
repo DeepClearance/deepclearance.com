@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { href: "/", title: "Overview" },
   { href: "/methodology/", title: "Methodology" },
   { href: "/docs/", title: "Docs" },
+  { href: "/skills/", title: "Skills" },
   { href: "/pricing/", title: "Plans" },
 ];
 
