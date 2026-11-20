@@ -21,7 +21,7 @@ export default function MyApp({ Component, pageProps }) {
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="describedby" href="/llms.txt" />
       </Head>
-      <SiteHead />
+      <SiteHead dispatch={pageProps.dispatch} />
       <Layout>
         <a className="skip-link" href="#content">
           Skip to content

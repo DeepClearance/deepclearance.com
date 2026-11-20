@@ -19,9 +19,9 @@ function btcFromSats(sats) {
   return frac ? `${whole}.${frac}` : String(whole);
 }
 
-export default function SiteHead() {
+export default function SiteHead({ dispatch }) {
   const router = useRouter();
-  const meta = pageMeta(router.pathname);
+  const meta = pageMeta(dispatch ? `/dispatches/${dispatch.slug}/` : router.pathname, dispatch);
   const path = (router.pathname || "/").replace(/\/$/, "") || "/";
   const shareTitle = meta.shareTitle || meta.title;
   const shareDescription = meta.shareDescription || meta.description;
@@ -108,7 +108,7 @@ export default function SiteHead() {
       />
       <link rel="canonical" href={meta.url} />
       <link rel="sitemap" type="application/xml" href={`${SITE_ORIGIN}/sitemap.xml`} />
-      <meta property="og:type" content="website" />
+      <meta property="og:type" content={dispatch ? "article" : "website"} />
       <meta property="og:locale" content="en_US" />
       <meta property="og:site_name" content={SITE_NAME} />
       <meta property="og:title" content={shareTitle} />

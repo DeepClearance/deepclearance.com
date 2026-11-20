@@ -9,6 +9,7 @@ import SiteBrand from "./SiteBrand";
 
 const NAV_LINKS = [
   { href: "/", title: "Overview" },
+  { href: "/dispatches/", title: "Dispatches" },
   { href: "/methodology/", title: "Methodology" },
   { href: "/docs/", title: "Docs" },
   { href: "/skills/", title: "Skills" },
@@ -18,7 +19,8 @@ const NAV_LINKS = [
 function isActivePath(pathname, href) {
   const path = (pathname || "/").replace(/\/$/, "") || "/";
   const target = href.replace(/\/$/, "") || "/";
-  return path === target;
+  if (target === "/") return path === "/";
+  return path === target || path.startsWith(`${target}/`);
 }
 
 function accountLabel(user) {

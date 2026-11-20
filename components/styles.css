@@ -5134,3 +5134,21 @@ html.auto-dark .site-brand__img--forced-dark {
   letter-spacing: 0.12em;
   color: var(--text-secondary);
 }
+
+.dc-read time {
+  display: block;
+  color: var(--text-secondary);
+}
+
+.dc-read time + p {
+  margin-top: 0.85rem;
+}
+
+.dc-read ul {
+  margin: 0.35rem 0 1.25rem;
+  padding-left: 1.15rem;
+}
+
+.dc-read li + li {
+  margin-top: 0.35rem;
+}
