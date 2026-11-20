@@ -5,6 +5,7 @@ const ITEMS = [
   { href: "/", label: "Overview" },
   { href: "/methodology/", label: "Methodology" },
   { href: "/docs/", label: "Docs" },
+  { href: "/skills/", label: "Skills" },
   { href: "/pricing/", label: "Plans" },
   { href: "/subscribe/", label: "Checkout" },
   { href: "/account/", label: "Account" },
