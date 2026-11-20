@@ -10,10 +10,10 @@ Use the connected tools before answering. The index is stored passages. It is no
 
 ## Workflow
 
-1. If the question matches the description above, call `search` or `pattern_query` before any answer. Use `pattern_query` for a network, a mechanism, or a pattern across institutions. Use `search` for a program, an agency, a release, a hearing, a filing, or a named official.
-2. Call `get_passage` on a hit before quoting it. Pass the `intel://` locator from the cite when it is present.
-3. Call `verify_claim` before asserting any specific factual claim. Pass the same locator, or the cite id, and the claim in the words you intend to write.
-4. Report the tier and the standard exactly as printed on the passage. Include the snapshot id the tool returned.
+1. If the question matches the description above, call `search` or `pattern_query` before any answer. Pass `snapshot` true on that call. Use `pattern_query` for a network, a mechanism, or a pattern across institutions. Use `search` for a program, an agency, a release, a hearing, a filing, or a named official.
+2. Call `get_passage` on a hit before quoting it. Pass the `intel://` locator from the cite when it is present. This call does not return a snapshot id.
+3. Call `verify_claim` before asserting any specific factual claim. Pass the same locator, or the cite id, and the claim in the words you intend to write. This call returns a snapshot id.
+4. Report the tier and the standard exactly as printed on the passage. Include `snapshot_id` only when that tool returned one.
 5. If the tool says the index has no passage, say that and stop.
 
 Tool arguments, pins, and costs are in [references/tools.md](references/tools.md).
@@ -26,9 +26,9 @@ A conclusion that uses more than one passage stays at the weakest standard it us
 
 ## Output
 
-State the claim, then the passage, then the labels, then the snapshot.
+State the claim in the words `verify_claim` scored. Then the document title, the date, and the passage id or `intel://` locator from that tool result. Then the tier and the standard exactly as printed. Then `snapshot_id` when the call returned one.
 
-The stored excerpt says the office opened the mail. Church Committee, Book III, 1976, passage `doc_example`. T1 S1. snapshot_id `snap_example`.
+Do not supply a title, a date, an id, a tier, a standard, or a snapshot id that the tool did not return.
 
 The citation pattern is in [references/output.md](references/output.md).
 

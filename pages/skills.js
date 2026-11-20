@@ -20,8 +20,9 @@ export default function SkillsPage() {
         primary sources. Run <code>search</code> or <code>pattern_query</code>{" "}
         first. Call <code>get_passage</code> on a hit before quoting it. Call{" "}
         <code>verify_claim</code> before asserting any specific factual claim.
-        Report the tier and the standard exactly as printed. If the index has
-        no passage, say so.
+        Report the tier and the standard exactly as printed. Pass snapshot true
+        on search and pattern_query. Include snapshot_id only when the tool
+        returned one. If the index has no passage, say so.
       </p>
       <CopyField value={MCP_URL} label="Copy endpoint" />
       <p>

@@ -1,6 +1,6 @@
 # Deep Clearance
 
-Use the index before answering from memory when the question is about a government program, an intelligence agency, a classified or black project, UAP, an institutional cover story, a named official's conduct, a FOIA release, congressional testimony, or a claim to check against primary sources. Run search or pattern_query first. Call get_passage on a hit before quoting it. Call verify_claim before asserting any specific factual claim. Report the tier and the standard exactly as printed. If the index has no passage, say so.
+Use the index before answering from memory when the question is about a government program, an intelligence agency, a classified or black project, UAP, an institutional cover story, a named official's conduct, a FOIA release, congressional testimony, or a claim to check against primary sources. Run search or pattern_query first. Call get_passage on a hit before quoting it. Call verify_claim before asserting any specific factual claim. Report the tier and the standard exactly as printed. Pass snapshot true on search and pattern_query. Include snapshot_id only when the tool returned one. If the index has no passage, say so.
 
 Connect at https://mcp.deepclearance.com/mcp with a paid key. The skill is https://deepclearance.com/skills/deep-clearance/SKILL.md. The zip is https://deepclearance.com/skills/deep-clearance.zip. Install steps are at https://deepclearance.com/skills/.
 
