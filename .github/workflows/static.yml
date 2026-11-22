@@ -28,6 +28,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Static export
+        env:
+          NEWSROOM_URL: ${{ vars.NEWSROOM_URL }}
+          NEWSROOM_BUILD_TOKEN: ${{ secrets.NEWSROOM_BUILD_TOKEN }}
         run: npm run export
       - name: Setup Pages
         uses: actions/configure-pages@v5
