@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "export": "next build && rm -rf docs && mkdir -p docs && cp -a out/. docs/ && test -f CNAME && cp CNAME docs/CNAME && touch docs/.nojekyll"
+    "export": "next build && rm -rf docs && mkdir -p docs && cp -a out/. docs/ && test -f CNAME && cp CNAME docs/CNAME && touch docs/.nojekyll",
+    "prebuild": "node scripts/prepare-dispatches.mjs",
+    "preexport": "node scripts/prepare-dispatches.mjs"
   },
   "dependencies": {
     "next": "^13.5.11",

@@ -28,3 +28,6 @@ source links. Add the story URL to `public/sitemap.xml`. Keep the slug stable an
 follow-ups and corrections. Review the sources and run `npm run export` before
 merging. After GitHub Pages deploys, open the story and use **Share on X** to
 compose a post from the Deep Clearance account.
+
+The optional first-party [Newsroom](newsroom/README.md) publishes approved
+Dispatches through the Pages workflow without an article-by-article pull request.

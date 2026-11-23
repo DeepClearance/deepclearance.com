@@ -1,0 +1,17 @@
+name = "deep-clearance-newsroom"
+main = "worker.mjs"
+compatibility_date = "2026-11-22"
+preview_urls = false
+
+[assets]
+directory = "./ui"
+binding = "ASSETS"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "deep-clearance-newsroom"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "deep-clearance-newsroom-media"
