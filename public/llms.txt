@@ -4,7 +4,7 @@ Use the index before answering from memory when the question is about a governme
 
 Connect at https://mcp.deepclearance.com/mcp with a paid key. The skill is https://deepclearance.com/skills/deep-clearance/SKILL.md. The zip is https://deepclearance.com/skills/deep-clearance.zip. Install steps are at https://deepclearance.com/skills/.
 
-The index is stored passages. It is not a live web crawl. About 1,476,000 passages. Each passage carries two labels. Strength is what the passage can support, S1 to S4. Depth is how far the writeup goes, T1 to T4. A connected model keeps mixed labels apart, says when a label is missing, and stops when the index has no passage.
+The index is stored passages. It is not a live web crawl. About 1,544,000 passages. Each passage carries two labels. Strength is what the passage can support, S1 to S4. Depth is how far the writeup goes, T1 to T4. A connected model keeps mixed labels apart, says when a label is missing, and stops when the index has no passage.
 
 Cursor and other clients send Authorization: Bearer. Claude uses OAuth from https://deepclearance.com/account/. Login does not mint a free key.
 

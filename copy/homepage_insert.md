@@ -22,7 +22,7 @@ One index, many institutions.
 
 Federal Reserve transcripts from the 2008 crisis, the federal accounting standard for classified defense spending, patents, contracts, and court documents sit in one index. One question can cross all of them.
 
-About 1,476,000 primary source passages, under one standard, each with its source attached.
+About 1,544,000 primary source passages, under one standard, each with its source attached.
 
 Pay with Lightning. Connect over MCP.
 
