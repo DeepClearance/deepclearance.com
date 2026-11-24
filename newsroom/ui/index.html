@@ -35,6 +35,7 @@
       <label>X copy<textarea name="xCopy" rows="4" maxlength="3000"></textarea></label>
       <div class="actions">
         <button type="button" id="preview">Preview</button>
+        <button type="button" id="review-x">Review X post</button>
         <button type="submit">Save draft</button>
         <button type="submit" id="publish">Publish to website</button>
       </div>
@@ -43,6 +44,14 @@
   <dialog id="preview-dialog">
     <form method="dialog"><button>Close preview</button></form>
     <article id="preview-content"></article>
+  </dialog>
+  <dialog id="x-dialog">
+    <form method="dialog"><button>Close</button></form>
+    <h2>Review X post</h2>
+    <p id="x-copy" style="white-space: pre-wrap"></p>
+    <img id="x-card" alt="" hidden>
+    <p id="x-status" role="status"></p>
+    <button type="button" id="send-x">Approve and publish on X</button>
   </dialog>
 </main>
 <script type="module" src="/editor.js"></script>

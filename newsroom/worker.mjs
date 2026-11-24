@@ -1,3 +1,5 @@
+import { xRoute } from "./x-publish.mjs";
+
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const mediaPattern = /^[a-f0-9]{64}\.(png|jpg|webp)$/;
 const mediaTypes = { "image/png": "png", "image/jpeg": "jpg", "image/webp": "webp" };
@@ -76,11 +78,11 @@ async function route(request, env) {
 
   if (pathname === "/api/build/dispatches" && method === "GET") {
     const { results } = await env.DB.prepare(
-      "SELECT e.content FROM editions e WHERE published = 1 AND revision = (SELECT MAX(p.revision) FROM editions p WHERE p.slug = e.slug AND p.published = 1)",
+      "SELECT e.content, e.revision FROM editions e WHERE published = 1 AND revision = (SELECT MAX(p.revision) FROM editions p WHERE p.slug = e.slug AND p.published = 1)",
     ).all();
-    return json(results.map(({ content }) => {
+    return json(results.map(({ content, revision }) => {
       const { xCopy, ...article } = JSON.parse(content);
-      return article;
+      return { ...article, revision };
     }));
   }
 
@@ -133,6 +135,11 @@ async function route(request, env) {
   }
 
   if (pathname === "/api/editor/deploy" && method === "POST") return json(await deployment(env));
+
+  const distribution = pathname.match(/^\/api\/editor\/x\/([^/]+)$/);
+  if (distribution && slugPattern.test(distribution[1]) && ["GET", "POST"].includes(method)) {
+    return xRoute(request, env, distribution[1], json);
+  }
 
   const entry = pathname.match(/^\/api\/editor\/dispatches\/([^/]+)$/);
   if (entry && method === "PUT" && entry[1].length <= 100 && slugPattern.test(entry[1])) {

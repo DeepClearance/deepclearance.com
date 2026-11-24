@@ -166,3 +166,40 @@ form.onsubmit = (event) => {
     await refresh();
   });
 };
+
+$("review-x").onclick = () => action(async () => {
+  if (!lockedSlug) throw new Error("Publish this Dispatch to the website first.");
+  const path = `x/${encodeURIComponent(lockedSlug)}`;
+  const review = await (await request(path)).json();
+  $("x-copy").textContent = review.text;
+  const dialog = $("x-dialog");
+  const card = $("x-card");
+  card.hidden = true;
+  if (review.image) {
+    const blob = await (await request(`media/${review.image.key}`)).blob();
+    card.src = URL.createObjectURL(blob);
+    card.alt = review.image.alt;
+    card.hidden = false;
+    dialog.addEventListener("close", () => URL.revokeObjectURL(card.src), { once: true });
+  }
+  const send = $("send-x");
+  const status = $("x-status");
+  status.textContent = review.postUrl ? `Published: ${review.postUrl}`
+    : !review.configured ? "X account setup required."
+    : ["sending", "uncertain"].includes(review.status) ? "Check the X account before retrying." : "";
+  send.disabled = !review.configured || !review.text || !review.image || !["ready", "failed"].includes(review.status);
+  send.onclick = async () => {
+    send.disabled = true;
+    status.textContent = "Sending…";
+    try {
+      const posted = await (await request(path, {
+        method: "POST", headers: { "content-type": "application/json" },
+        body: JSON.stringify({ revision: review.revision }),
+      })).json();
+      status.textContent = `Published: ${posted.postUrl}`;
+    } catch (error) {
+      status.textContent = error.message;
+    }
+  };
+  dialog.showModal();
+});
