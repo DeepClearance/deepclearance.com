@@ -23,6 +23,9 @@ export default function SiteHead({ dispatch }) {
   const router = useRouter();
   const meta = pageMeta(dispatch ? `/dispatches/${dispatch.slug}/` : router.pathname, dispatch);
   const path = (router.pathname || "/").replace(/\/$/, "") || "/";
+  const shareImage = dispatch?.image;
+  const imageUrl = shareImage ? `${SITE_ORIGIN}${shareImage.src}` : OG_IMAGE;
+  const imageAlt = shareImage?.alt || "Deep Clearance";
   const shareTitle = meta.shareTitle || meta.title;
   const shareDescription = meta.shareDescription || meta.description;
   const orgId = `${SITE_ORIGIN}/#organization`;
@@ -108,22 +111,24 @@ export default function SiteHead({ dispatch }) {
       />
       <link rel="canonical" href={meta.url} />
       <link rel="sitemap" type="application/xml" href={`${SITE_ORIGIN}/sitemap.xml`} />
+      <link rel="alternate" type="application/rss+xml" title="Deep Clearance Dispatch" href={`${SITE_ORIGIN}/dispatches/rss.xml`} />
+      {dispatch?.revision && <meta name="dispatch-revision" content={String(dispatch.revision)} />}
       <meta property="og:type" content={dispatch ? "article" : "website"} />
       <meta property="og:locale" content="en_US" />
       <meta property="og:site_name" content={SITE_NAME} />
       <meta property="og:title" content={shareTitle} />
       <meta property="og:description" content={shareDescription} />
       <meta property="og:url" content={meta.url} />
-      <meta property="og:image" content={OG_IMAGE} />
-      <meta property="og:image:alt" content="Deep Clearance" />
-      <meta property="og:image:type" content="image/png" />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
+      <meta property="og:image" content={imageUrl} />
+      <meta property="og:image:alt" content={imageAlt} />
+      <meta property="og:image:type" content={shareImage?.type || "image/png"} />
+      {!shareImage && <meta property="og:image:width" content="1200" />}
+      {!shareImage && <meta property="og:image:height" content="630" />}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={shareTitle} />
       <meta name="twitter:description" content={shareDescription} />
-      <meta name="twitter:image" content={OG_IMAGE} />
-      <meta name="twitter:image:alt" content="Deep Clearance" />
+      <meta name="twitter:image" content={imageUrl} />
+      <meta name="twitter:image:alt" content={imageAlt} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

@@ -1,17 +1,19 @@
 import Link from "next/link";
 import IntelChrome from "../../components/IntelChrome";
-import { dispatchDate, dispatches } from "../../lib/dispatches";
+import { dispatchDate } from "../../lib/dispatches";
 import { SITE_ORIGIN } from "../../lib/pageMeta";
 
-export function getStaticPaths() {
+import { dispatchSnapshot } from "../../lib/dispatchSnapshot";
+
+export async function getStaticPaths() {
   return {
-    paths: dispatches.map(({ slug }) => ({ params: { slug } })),
+    paths: (await dispatchSnapshot()).map(({ slug }) => ({ params: { slug } })),
     fallback: false,
   };
 }
 
-export function getStaticProps({ params }) {
-  const dispatch = dispatches.find(({ slug }) => slug === params.slug);
+export async function getStaticProps({ params }) {
+  const dispatch = (await dispatchSnapshot()).find(({ slug }) => slug === params.slug);
   return dispatch ? { props: { dispatch } } : { notFound: true };
 }
 
@@ -23,6 +25,13 @@ export default function DispatchPage({ dispatch }) {
     <IntelChrome title={dispatch.title} lede={dispatch.summary}>
       <article className="dc-read">
         <time dateTime={dispatch.date}>{dispatchDate(dispatch.date)}</time>
+        {dispatch.image && (
+          <img
+            src={dispatch.image.src}
+            alt={dispatch.image.alt}
+            style={{ display: "block", maxWidth: "100%", height: "auto", margin: "1rem 0" }}
+          />
+        )}
         {dispatch.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
         <h2>Sources</h2>
         <ul>

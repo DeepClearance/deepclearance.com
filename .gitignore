@@ -36,3 +36,12 @@ coverage/
 
 # Vercel
 .vercel/
+
+# Build-time newsroom snapshot and published feed
+/.newsroom-dispatches.json
+/public/assets/newsroom/
+/public/dispatches/rss.xml
+/public/dispatches/sitemap.xml
+/newsroom/wrangler.toml
+/newsroom/.wrangler/
+/newsroom/.dev.vars

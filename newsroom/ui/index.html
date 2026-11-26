@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deep Clearance Newsroom</title>
+<link rel="stylesheet" href="/editor.css">
+<header><strong>Deep Clearance</strong><span>Newsroom</span></header>
+<main>
+  <form id="login">
+    <h1>Newsroom sign-in</h1>
+    <p>Behind Cloudflare Access, leave the key empty.</p>
+    <label>Editor key<input id="key" type="password" autocomplete="off"></label>
+    <button>Sign in</button>
+  </form>
+  <p id="status" role="status"></p>
+  <section id="workspace" hidden>
+    <nav aria-label="Dispatches">
+      <button id="new">New dispatch</button>
+      <div id="stories"></div>
+      <p id="whoami"></p>
+      <button id="export">Export revisions</button>
+      <button id="ledger">Export approval ledger</button>
+      <button id="quality">Quality report</button>
+      <button id="deploy">Retry site update</button>
+      <button id="logout">Sign out</button>
+    </nav>
+    <form id="editor">
+      <h1>Dispatch editor</h1>
+      <label>URL slug<input name="slug" required maxlength="100" pattern="[a-z0-9]+(-[a-z0-9]+)*"></label>
+      <label>Headline<input name="title" maxlength="240"></label>
+      <label>Summary<textarea name="summary" rows="2" maxlength="500"></textarea></label>
+      <label>Publication date<input name="date" type="date"></label>
+      <label>Article<textarea name="article" rows="10" placeholder="Separate paragraphs with a blank line"></textarea></label>
+      <fieldset><legend>Sources</legend><div id="sources"></div><button type="button" id="add-source">Add source</button></fieldset>
+      <fieldset><legend>Corrections</legend><div id="updates"></div><button type="button" id="add-update">Add correction</button></fieldset>
+      <label>Article card<input name="card" type="file" accept="image/png,image/jpeg,image/webp"></label>
+      <p id="image-status"></p>
+      <label>Card alt text<input name="alt" maxlength="500"></label>
+      <label>X copy<textarea name="xCopy" rows="4" maxlength="3000"></textarea></label>
+      <div class="actions">
+        <button type="button" id="preview">Preview</button>
+        <button type="button" id="review-x">Review X post</button>
+        <button type="submit">Save draft</button>
+        <button type="submit" id="publish">Publish to website</button>
+      </div>
+    </form>
+  </section>
+  <dialog id="preview-dialog">
+    <form method="dialog"><button>Close preview</button></form>
+    <article id="preview-content"></article>
+  </dialog>
+  <dialog id="x-dialog">
+    <form method="dialog"><button>Close</button></form>
+    <h2>Review X post</h2>
+    <p id="x-copy" style="white-space: pre-wrap"></p>
+    <img id="x-card" alt="" hidden>
+    <p id="x-length"></p>
+    <label>Note for the ledger (optional)<input id="x-note" maxlength="1000"></label>
+    <p id="x-status" role="status"></p>
+    <button type="button" id="send-x">Approve and publish on X</button>
+    <button type="button" id="reject-x">Reject</button>
+  </dialog>
+</main>
+<script type="module" src="/editor.js"></script>
+</html>
