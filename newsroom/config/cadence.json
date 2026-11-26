@@ -1,0 +1,12 @@
+{
+  "_note": "Targets from /workspace/Marketing-Pack/_governance/2026-11-26/DC_CADENCE_RESEARCH.md (window 2026-11-19 20:00Z to 2026-11-26 18:59Z): Kalshi 60.4 originals/day, Polymarket 61.2, unusual_whales 35.5, KobeissiLetter 21.7, WatcherGuru 19.4, PolymarketIntel 12.4. Peaks 13-17 UTC, second bump 19-22 UTC; quiet 03-09 UTC. Override with CADENCE_JSON.",
+  "postsPerDay": 12,
+  "minGapMinutes": 20,
+  "maxPerHour": 4,
+  "quietHoursUtc": [3, 9],
+  "peakWindowsUtc": [[13, 17], [19, 22]],
+  "offPeakGapMultiplier": 2,
+  "draftsPerRun": 3,
+  "deployMinGapMinutes": 10,
+  "leadMaxAgeHours": 24
+}

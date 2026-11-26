@@ -1,0 +1,37 @@
+{
+  "_note": "Primary-source beats for Deep Clearance (charter: institutional mechanisms and incentives, monetary/economic context, public records). Each item is an issuer's own feed. Override with the SOURCES_JSON Worker var (same shape). All URLs returned HTTP 200 on 2026-11-26.",
+  "sources": [
+    { "id": "fed-press", "name": "Federal Reserve Board press releases", "kind": "feed", "url": "https://www.federalreserve.gov/feeds/press_all.xml", "beat": "monetary" },
+    { "id": "sec-press", "name": "SEC press releases", "kind": "feed", "url": "https://www.sec.gov/news/pressreleases.rss", "beat": "regulators" },
+    { "id": "cftc-press", "name": "CFTC general press releases", "kind": "feed", "url": "https://www.cftc.gov/RSS/RSSGP/rssgp.xml", "beat": "regulators" },
+    { "id": "occ-news", "name": "OCC news releases", "kind": "feed", "url": "https://www.occ.gov/rss/occ_news.xml", "beat": "regulators" },
+    { "id": "cfpb-newsroom", "name": "CFPB newsroom", "kind": "feed", "url": "https://www.consumerfinance.gov/about-us/newsroom/feed/", "beat": "regulators" },
+    { "id": "ftc-press", "name": "FTC press releases", "kind": "feed", "url": "https://www.ftc.gov/feeds/press-release.xml", "beat": "regulators" },
+    { "id": "doj-press", "name": "Department of Justice press releases", "kind": "feed", "url": "https://www.justice.gov/news/rss?type=press_release&m=1", "beat": "courts-enforcement" },
+    { "id": "federal-register-rules", "name": "Federal Register rules and proposed rules", "kind": "feed", "url": "https://www.federalregister.gov/api/v1/documents.rss?conditions%5Btype%5D%5B%5D=RULE&conditions%5Btype%5D%5B%5D=PRORULE", "beat": "rules", "maxItems": 40 },
+    { "id": "gao-reports", "name": "GAO reports and testimonies", "kind": "feed", "url": "https://www.gao.gov/rss/reports.xml", "beat": "oversight" },
+    { "id": "cbo-publications", "name": "CBO publications", "kind": "feed", "url": "https://www.cbo.gov/publications/all/rss.xml", "beat": "fiscal" },
+    { "id": "bis-press", "name": "BIS media releases", "kind": "feed", "url": "https://www.bis.org/doclist/all_pressrels.rss", "beat": "monetary" },
+    { "id": "ecb-press", "name": "ECB press releases", "kind": "feed", "url": "https://www.ecb.europa.eu/rss/press.html", "beat": "monetary" },
+    { "id": "boe-news", "name": "Bank of England news", "kind": "feed", "url": "https://www.bankofengland.co.uk/rss/news", "beat": "monetary" }
+  ],
+  "_leadsNote": "Fast X accounts are lead discovery only. A lead becomes a draft only when it links to an allowed primary-source domain, and the claims cite that source, never the X post. Numeric user IDs (2026-11-26). Override with LEAD_ACCOUNTS_JSON.",
+  "leadAccounts": [
+    { "id": "1071484733543079936", "username": "Kalshi" },
+    { "id": "1261335549215989760", "username": "Polymarket" },
+    { "id": "1495480590572961792", "username": "PolymarketIntel" },
+    { "id": "1200616796295847936", "username": "unusual_whales" },
+    { "id": "1387497871751196672", "username": "WatcherGuru" },
+    { "id": "3316376038", "username": "KobeissiLetter" }
+  ],
+  "primaryDomains": [
+    "federalreserve.gov", "sec.gov", "cftc.gov", "occ.gov", "occ.treas.gov", "consumerfinance.gov", "ftc.gov", "justice.gov",
+    "federalregister.gov", "govinfo.gov", "gao.gov", "cbo.gov", "treasury.gov", "fdic.gov", "congress.gov", "house.gov", "senate.gov",
+    "uscourts.gov", "supremecourt.gov", "courtlistener.com", "bls.gov", "bea.gov", "census.gov", "whitehouse.gov",
+    "bis.org", "ecb.europa.eu", "europa.eu", "bankofengland.co.uk", "imf.org", "worldbank.org", "oecd.org", "un.org", "gov.uk"
+  ],
+  "blocklist": [
+    "redpill", "red pill", "sheeple", "wake up", "trust the plan", "they don't want you to know", "do your own research",
+    "🚨", "—", "classified documents are in the index"
+  ]
+}
