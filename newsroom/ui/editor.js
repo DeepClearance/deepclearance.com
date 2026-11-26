@@ -56,6 +56,34 @@ function load(story = {}) {
   $("updates").replaceChildren();
   (story.sources || []).forEach(source => row("sources", sourceFields, source));
   (story.updates || []).forEach(update => row("updates", updateFields, update));
+  renderEvidence(story.claims);
+}
+
+function renderEvidence(claims) {
+  $("evidence").hidden = !claims?.length;
+  $("evidence-rows").replaceChildren(...(claims || []).map((claim, index) => {
+    const item = document.createElement("p");
+    item.textContent = `${index + 1}. ${claim.claim} | quote: "${claim.quote}" | ${claim.sourceUrl} | fetched ${claim.fetchedAt} | sha256 ${String(claim.sha256).slice(0, 16)} | ${claim.primary && claim.quoteFound ? "checked" : "NOT CHECKED"}`;
+    return item;
+  }));
+}
+
+async function refreshPipeline() {
+  const state = await (await request("pipeline")).json();
+  $("pipeline-mode").textContent = `Mode: ${state.mode}${state.mode === "queue" && state.autoRequested ? " (auto requested but AUTO_POSTING_ENABLED is not true)" : ""}`
+    + ` · kill switch ${state.killSwitch ? "ON" : "off"} · cap ${state.cadence.maxPerHour}/hour, ${state.cadence.postsPerDay}/day, gap ${state.cadence.minGapMinutes} min`
+    + (state.gate ? ` · next post waits: ${state.gate.reason}` : "") + (state.scheduled.length ? ` · ${state.scheduled.length} approved post(s) scheduled` : "");
+  $("kill-switch").textContent = state.killSwitch ? "Resume X posting" : "Stop all X posting";
+  $("kill-switch").onclick = () => action(async () => {
+    await request("kill-switch", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ on: !state.killSwitch }) });
+    await refreshPipeline();
+  });
+  $("pipeline-items").replaceChildren(...state.items.slice(0, 30).map((item) => {
+    const line = document.createElement("p");
+    const reasons = JSON.parse(item.reasons || "[]");
+    line.textContent = `${item.slug} · ${item.status}${reasons.length ? ` · ${reasons.join(" ")}` : ""}`;
+    return line;
+  }));
 }
 
 async function refresh() {
@@ -92,6 +120,7 @@ $("login").onsubmit = (event) => {
     const me = await (await request("whoami")).json();
     $("whoami").textContent = `Signed in as ${me.user} (${me.method})`;
     await refresh();
+    await refreshPipeline();
     $("key").value = "";
     $("login").hidden = true;
     $("workspace").hidden = false;
@@ -221,7 +250,8 @@ $("review-x").onclick = () => action(async () => {
         method: "POST", headers: { "content-type": "application/json" },
         body: JSON.stringify({ revision: review.revision, text: review.text, decision, note: $("x-note").value }),
       })).json();
-      status.textContent = decision === "approve" ? `Published: ${outcome.postUrl} (ledger ${outcome.ref})`
+      status.textContent = decision === "approve" && outcome.status === "scheduled" ? `Approved and scheduled: ${outcome.reason} (ledger ${outcome.ref})`
+        : decision === "approve" ? `Published: ${outcome.postUrl} (ledger ${outcome.ref})`
         : `Rejected (ledger ${outcome.ref})`;
     } catch (error) {
       status.textContent = error.message;

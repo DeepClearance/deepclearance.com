@@ -4,7 +4,7 @@ import worker from "../worker.mjs";
 import { d1, sha256, strictFetch, tokenKey } from "./helpers.mjs";
 
 async function setup(t, { live = true, fail = false } = {}) {
-  const DB = d1("schema.sql", "x-schema.sql");
+  const DB = d1("schema.sql", "x-schema.sql", "pipeline-schema.sql");
   const copy = "Federal Register notice: the agency proposes a new reporting rule for bank holding companies.";
   const image = { key: "a".repeat(64) + ".jpg", alt: "Document crop of the notice." };
   const insert = DB.sql.prepare("INSERT INTO editions (slug, revision, published, content) VALUES (?, 1, 1, ?)");
@@ -12,7 +12,7 @@ async function setup(t, { live = true, fail = false } = {}) {
   const env = {
     EDITOR_TOKEN: "shared", EDITOR_TOKENS: JSON.stringify({ josh: await sha256("josh-key"), maya: await sha256("maya-key") }),
     X_APPROVERS: "josh", X_CLIENT_ID: "client", X_CLIENT_SECRET: "secret", X_REFRESH_TOKEN: "initial",
-    X_ACCOUNT_ID: "123", X_TOKEN_KEY: tokenKey(), DB,
+    X_ACCOUNT_ID: "123", X_TOKEN_KEY: tokenKey(), DB, CADENCE_JSON: JSON.stringify({ minGapMinutes: 0 }),
     MEDIA: { get: async () => ({ arrayBuffer: async () => new ArrayBuffer(4), httpMetadata: { contentType: "image/jpeg" } }) },
   };
   const state = { live, fail, sends: 0, refresh: [] };

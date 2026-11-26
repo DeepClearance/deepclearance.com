@@ -1,5 +1,11 @@
 import { buildAuthorized, editorIdentity, rateLimited, recordFailure } from "./lib/auth.mjs";
+import { canApprove } from "./lib/auth.mjs";
+import { deployment } from "./lib/deploy.mjs";
 import * as ledger from "./lib/ledger.mjs";
+import { HARD_MAX_PER_HOUR, loadConfig, postingMode } from "./pipeline/config.mjs";
+import { runPipeline } from "./pipeline/run.mjs";
+import { gate, killSwitchOn } from "./pipeline/scheduler.mjs";
+import { settingsStore } from "./pipeline/settings.mjs";
 import { xRoute } from "./lib/x-publish.mjs";
 
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -38,26 +44,6 @@ function normalize(input, slug) {
   };
 }
 
-async function deployment(env) {
-  if (!env.GITHUB_PUBLISH_TOKEN) return { queued: false };
-  try {
-    const response = await fetch(
-      "https://api.github.com/repos/DeepClearance/deepclearance.com/actions/workflows/static.yml/dispatches",
-      {
-        method: "POST",
-        headers: {
-          authorization: `Bearer ${env.GITHUB_PUBLISH_TOKEN}`,
-          accept: "application/vnd.github+json",
-          "user-agent": "DeepClearance-Newsroom",
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({ ref: "main" }),
-      },
-    );
-    return { queued: response.ok, status: response.status };
-  } catch { return { queued: false }; }
-}
-
 async function route(request, env) {
   const { pathname } = new URL(request.url);
   const method = request.method;
@@ -81,6 +67,28 @@ async function route(request, env) {
     return json(rows);
   }
   if (pathname === "/api/editor/quality" && method === "GET") return json(await ledger.quality(env));
+
+  if (pathname === "/api/editor/pipeline" && method === "GET") {
+    const { results: items } = await env.DB.prepare(
+      "SELECT slug, status, reasons, created_at, updated_at FROM pipeline_items ORDER BY created_at DESC LIMIT 100").all();
+    const { results: scheduled } = await env.DB.prepare("SELECT slug, revision, approved_at FROM scheduled_posts ORDER BY approved_at").all();
+    return json({
+      mode: postingMode(env), autoRequested: env.POSTING_MODE === "auto", autoEnabled: env.AUTO_POSTING_ENABLED === "true",
+      killSwitch: await killSwitchOn(env), killSwitchEnv: env.POSTING_KILL_SWITCH === "on",
+      cadence: loadConfig(env).cadence, hardMaxPerHour: HARD_MAX_PER_HOUR, gate: await gate(env, Date.now(), "queue"),
+      lastRun: JSON.parse(await settingsStore(env).get("last_run") || "null"), items, scheduled,
+    });
+  }
+  if (pathname === "/api/editor/kill-switch" && method === "POST") {
+    const { on } = await request.json();
+    if (typeof on !== "boolean") return json({ error: "Send {\"on\": true|false}." }, 400);
+    // Any signed-in editor can stop posting; only a named approver can resume it.
+    if (!on && !canApprove(identity, env)) return json({ error: "Only a named approver can turn posting back on." }, 403);
+    const settings = settingsStore(env);
+    await settings.set("kill_switch", on ? "on" : "off");
+    await settings.set("kill_switch_by", `${identity.user} ${new Date().toISOString()}`);
+    return json({ killSwitch: await killSwitchOn(env) });
+  }
 
   if (pathname === "/api/build/dispatches" && method === "GET") {
     const { results } = await env.DB.prepare(
@@ -146,7 +154,7 @@ async function route(request, env) {
 
   const distribution = pathname.match(/^\/api\/editor\/x\/([^/]+)$/);
   if (distribution && slugPattern.test(distribution[1]) && ["GET", "POST"].includes(method)) {
-    return xRoute(request, env, distribution[1], json, identity);
+    return xRoute(request, env, distribution[1], json, identity, (e) => gate(e, Date.now(), "queue"));
   }
 
   const entry = pathname.match(/^\/api\/editor\/dispatches\/([^/]+)$/);
@@ -157,6 +165,12 @@ async function route(request, env) {
       return json({ error: "Invalid revision or publish state." }, 400);
     }
     const article = normalize(input, entry[1]);
+    // Pipeline metadata (drafted X copy, claim/evidence table, lead) is kept server-side across edits.
+    const previous = await env.DB.prepare("SELECT content FROM editions WHERE slug = ? ORDER BY revision DESC LIMIT 1").bind(entry[1]).first();
+    if (previous) {
+      const { draftXCopy, claims, limits, pipeline } = JSON.parse(previous.content);
+      Object.assign(article, Object.fromEntries(Object.entries({ draftXCopy, claims, limits, pipeline }).filter(([, v]) => v !== undefined)));
+    }
     if (publish) {
       if (!article.title || !article.summary || !article.paragraphs.length || !date(article.date)
         || !article.sources.length || article.sources.some(source => !source.title || !webUrl(source.url))
@@ -172,6 +186,8 @@ async function route(request, env) {
     ).bind(article.slug, revision + 1, Number(publish), JSON.stringify(article), revision, article.slug).run();
     if (!result.meta.changes) return json({ error: "This story changed. Reopen it before saving." }, 409);
     if (publish) {
+      await env.DB.prepare("UPDATE pipeline_items SET status = 'published_manual', updated_at = ? WHERE slug = ? AND status = 'drafted'")
+        .bind(new Date().toISOString(), article.slug).run();
       await ledger.record(env, { kind: "site_publish", slug: article.slug, revision: revision + 1, text: article.title,
         imageKey: article.image?.key, actor: identity.user, actorMethod: identity.method, decision: "approved", mode: "queue" });
     }
@@ -181,6 +197,9 @@ async function route(request, env) {
 }
 
 export default {
+  async scheduled(controller, env, ctx) {
+    ctx.waitUntil(runPipeline(env, controller.scheduledTime || Date.now()).catch((error) => console.error(error)));
+  },
   async fetch(request, env) {
     try { return await route(request, env); }
     catch (error) {

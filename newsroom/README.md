@@ -59,3 +59,31 @@ Create a Cloudflare Access self-hosted application for the Worker's hostname, al
 Publish the Dispatch on the website with its X copy (without the canonical URL). The editor counts X weighted length, with the link counted as 23 characters, against the 280 limit. A card is optional; with one, alt text is required. Once Pages deploys that edition, choose **Review X post** and approve or reject the exact preview. The decision is written to the ledger before anything is sent. The newsroom checks the live edition and intended X account, attaches the card and alt text, and records the confirmed post ID.
 
 One active send is permitted across the newsroom to serialize credential rotation. A definite failure can be reviewed and retried. A timeout, ambiguous response, or interrupted Worker can leave an uncertain or sending record. Pause publishing and verify the account before recovery. If a post exists, reconcile the record to `posted` with its ID. Mark it `failed` only when the operator has verified that X did not publish the post. Never clear a sending record while a request may still be active.
+
+## Pipeline (monitor, draft, queue, post)
+
+A cron trigger (`*/10 * * * *`) runs `pipeline/run.mjs`:
+
+1. **Monitor.** Fetches every primary-source feed in `config/sources.json` (Federal Reserve, SEC, CFTC, OCC, CFPB, FTC, DOJ, Federal Register rules, GAO, CBO, BIS, ECB, Bank of England), and one fast lead account per run when `X_BEARER_TOKEN` is set. Lead accounts are discovery only: a post becomes a lead only if it links to an allowed primary-source domain (`primaryDomains`), and the lead is that source, never the post. Items older than `leadMaxAgeHours` are ignored.
+2. **Dedup.** Same URL (tracking parameters, `www.` and trailing slash ignored) or a near-identical title within 48 hours is dropped.
+3. **Draft.** Up to `draftsPerRun` new leads per run. The source is fetched and recorded (URL, HTTP status, fetch time, SHA-256 of the bytes). The model (`LLM_PROVIDER`, `LLM_MODEL`, secret `LLM_API_KEY`) returns a Dispatch and an X copy with a claim table. **Without a configured model nothing is drafted.** The prompt follows the adopted charter and writes no taglines.
+4. **Guardrails.** A draft is kept only when every claim cites a fetched primary source and its quote appears verbatim in that source, no blocklisted term appears (`blocklist` plus `BLOCKLIST_JSON`), and the X post fits 280 weighted characters with its link. Failing drafts are listed as blocked with reasons and never become editions.
+5. **Queue.** Passing drafts are unpublished editions with their claim and evidence table shown in the editor. An editor publishes to the website (ledger row), then a named approver uses **Review X post** to approve or reject the exact text (ledger row). Approvals that arrive while a cadence limit is hit are recorded and **scheduled**; the cron sends them when the gate opens, and only if the approved text and revision are still the live edition.
+6. **Cadence gate** (`config/cadence.json`, override with `CADENCE_JSON`): `postsPerDay` (rolling 24 h), `minGapMinutes`, `maxPerHour` (never above the hard cap of 6), `quietHoursUtc` and `peakWindowsUtc` (auto only; off-peak gap x `offPeakGapMultiplier`). Defaults: 12/day, 20-minute gap, 4/hour, quiet 03-09 UTC, peaks 13-17 and 19-22 UTC, from the cadence research of 2026-11-26.
+7. **Deploys** are debounced to one Pages run per `deployMinGapMinutes`.
+
+Apply the pipeline tables once: `npx wrangler d1 execute deep-clearance-newsroom --remote --file=pipeline-schema.sql`.
+
+### Posting mode and kill switch
+
+- **Queue (default, and the only active mode).** Every X post needs a named approver's decision, recorded in the ledger. Per holds.md A-20261126-DC-AUTOPOST-QUEUE, Josh approves each post for the first week.
+- **Automatic (built, off).** Only when **both** Worker vars are set by the owner: `POSTING_MODE = "auto"` **and** `AUTO_POSTING_ENABLED = "true"`. Any other value means queue. In auto mode the cron publishes one passing draft at a time within the daily target, waits for the edition to be live, and posts it inside the cadence gate, writing `site_publish` and `x_post` ledger rows with decision `auto`. To switch: review the Quality report, change both vars in `wrangler.toml` (or the dashboard), and `npx wrangler deploy`. To switch back, set either var back.
+- **Kill switch.** Any signed-in editor can press **Stop all X posting** (stored in D1); only a named approver can resume. `POSTING_KILL_SWITCH = "on"` stops posting regardless of the button. Monitoring and drafting continue; nothing is sent, scheduled posts wait.
+
+### Week-one quality review
+
+**Quality report** (`/api/editor/quality`) gives per day: approved as drafted, approved after the X copy was edited (drafted text hash differs from approved text hash), rejected, automatic posts, posted. `approvalRate` = approved as drafted / all decisions. **Export approval ledger** gives the same decisions as holds.md lines.
+
+### Cards
+
+`CARD_RENDERER = "none"` (default) posts without a card; X shows the site's link preview. `"stub"` is a wiring placeholder that never produces an image. A real renderer implements `({ article, claims, env }) => { key, alt } | null` in `pipeline/cards.mjs`, storing its image in R2 first.

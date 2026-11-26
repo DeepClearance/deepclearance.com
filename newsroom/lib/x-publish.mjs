@@ -116,6 +116,7 @@ export async function sendPost(env, { slug, revision, text, image }) {
 }
 
 export async function xRoute(request, env, slug, json, identity, gate = async () => null) {
+  // gate(env) returns null, { kind: "kill" } (refuse) or { kind: "rate" } (record the approval, send later).
   const getStatus = () => env.DB.prepare("SELECT status, post_id FROM x_distribution WHERE slug = ?").bind(slug).first();
   const edition = await latestPublished(env, slug);
   if (!edition) return json({ error: "Publish the Dispatch to the website first." }, 409);
@@ -146,15 +147,42 @@ export async function xRoute(request, env, slug, json, identity, gate = async ()
   if (status && status.status !== "failed") {
     return json({ error: "This Dispatch already has a send record. Check its X status.", ...result(status) }, 409);
   }
-  const blocked = await gate(env, { slug, revision });
-  if (blocked) return json({ error: blocked }, 409);
-  if (!(await editionIsLive(edition.url, revision))) {
+  const blocked = await gate(env);
+  if (blocked?.kind === "kill") return json({ error: blocked.reason }, 409);
+  if (!blocked && !(await editionIsLive(edition.url, revision))) {
     return json({ error: "This edition is not live on the website yet. Check the Pages deployment and try again." }, 409);
   }
 
   const approval = await ledger.record(env, { ...entry, decision: "approved" });
+  if (blocked) {
+    await ledger.setOutcome(env, approval.id, "scheduled");
+    await env.DB.prepare(
+      "INSERT INTO scheduled_posts (slug, revision, text, approval_id, approved_at) VALUES (?, ?, ?, ?, ?) ON CONFLICT(slug) DO UPDATE SET revision = excluded.revision, text = excluded.text, approval_id = excluded.approval_id, approved_at = excluded.approved_at",
+    ).bind(slug, revision, text, approval.id, new Date().toISOString()).run();
+    return json({ status: "scheduled", reason: blocked.reason, ref: approval.ref });
+  }
   const sent = await sendPost(env, { slug, revision, text, image: article.image });
   await ledger.setOutcome(env, approval.id, sent.status, sent.postId || null);
   if (!sent.ok) return json({ error: sent.error, ref: approval.ref }, sent.status === "busy" ? 409 : 502);
   return json({ ...result({ status: "posted", post_id: sent.postId }), ref: approval.ref });
+}
+
+// Sends at most one approved-and-scheduled post when the gate allows. The approved text and revision
+// must still be the live edition's; otherwise the approval lapses and must be given again.
+export async function dispatchScheduled(env, gate) {
+  const next = await env.DB.prepare("SELECT * FROM scheduled_posts ORDER BY approved_at LIMIT 1").first();
+  if (!next || await gate(env)) return null;
+  const edition = await latestPublished(env, next.slug);
+  const drop = () => env.DB.prepare("DELETE FROM scheduled_posts WHERE slug = ?").bind(next.slug).run();
+  if (!edition || edition.revision !== next.revision || edition.text !== next.text) {
+    await ledger.setOutcome(env, next.approval_id, "lapsed: edition changed");
+    await drop();
+    return { slug: next.slug, status: "lapsed" };
+  }
+  if (!(await editionIsLive(edition.url, next.revision))) return { slug: next.slug, status: "waiting-for-site" };
+  const sent = await sendPost(env, { slug: next.slug, revision: next.revision, text: next.text, image: edition.article.image });
+  if (sent.status === "busy") return { slug: next.slug, status: "busy" };
+  await ledger.setOutcome(env, next.approval_id, sent.status, sent.postId || null);
+  await drop();
+  return { slug: next.slug, status: sent.status };
 }

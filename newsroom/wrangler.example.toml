@@ -18,6 +18,10 @@ database_id = "REPLACE_WITH_D1_DATABASE_ID"
 binding = "MEDIA"
 bucket_name = "deep-clearance-newsroom-media"
 
+# Pipeline: monitor sources, draft, dispatch scheduled posts and (only in auto mode) publish and post.
+[triggers]
+crons = ["*/10 * * * *"]
+
 [vars]
 # Cloudflare Access (recommended). Team domain like "yourteam.cloudflareaccess.com" and the app's AUD tag.
 ACCESS_TEAM_DOMAIN = ""
@@ -26,6 +30,21 @@ ACCESS_AUD = ""
 X_APPROVERS = ""
 AUTH_MAX_FAILURES = "10"
 
+# Posting mode. Queue is the default and stays the only active mode until Josh decides otherwise
+# (holds.md A-20261126-DC-AUTOPOST-QUEUE). Automatic posting needs BOTH of these changed by Josh.
+POSTING_MODE = "queue"
+AUTO_POSTING_ENABLED = "false"
+# Emergency stop for all X sends ("on" stops posting; the editor also has a stop button).
+POSTING_KILL_SWITCH = "off"
+# Card rendering: "none" (default) or "stub". Card method is still open.
+CARD_RENDERER = "none"
+# Drafting model: "openai" | "xai" | "anthropic" | "openai-compatible". Empty = nothing is drafted.
+LLM_PROVIDER = ""
+LLM_MODEL = ""
+LLM_BASE_URL = ""
+# Optional JSON overrides of newsroom/config/*.json: CADENCE_JSON, SOURCES_JSON, LEAD_ACCOUNTS_JSON,
+# PRIMARY_DOMAINS_JSON, BLOCKLIST_JSON (added to the defaults).
+
 # Secrets (set with `npx wrangler secret put NAME`, never here):
 # EDITOR_TOKENS   JSON {"name": "<sha256 hex of that person's key>"}; per-person editor keys
 # EDITOR_TOKEN    optional legacy shared key; can edit, can never approve X posts
@@ -33,3 +52,5 @@ AUTH_MAX_FAILURES = "10"
 # GITHUB_PUBLISH_TOKEN  fine-grained token, Actions: write on DeepClearance/deepclearance.com only
 # X_CLIENT_ID, X_CLIENT_SECRET, X_REFRESH_TOKEN, X_ACCOUNT_ID  Deep Clearance X app + account
 # X_TOKEN_KEY     32 random bytes, base64; seals the rotating X refresh token in D1
+# X_BEARER_TOKEN  app-only bearer token of the same X app, read-only, for lead accounts (optional)
+# LLM_API_KEY     drafting model key (optional; without it nothing is drafted)
