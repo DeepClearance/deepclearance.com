@@ -41,6 +41,7 @@ coverage/
 /.newsroom-dispatches.json
 /public/assets/newsroom/
 /public/dispatches/rss.xml
+/public/dispatches/sitemap.xml
 /newsroom/wrangler.toml
 /newsroom/.wrangler/
 /newsroom/.dev.vars

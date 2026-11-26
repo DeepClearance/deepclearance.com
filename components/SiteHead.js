@@ -111,6 +111,7 @@ export default function SiteHead({ dispatch }) {
       />
       <link rel="canonical" href={meta.url} />
       <link rel="sitemap" type="application/xml" href={`${SITE_ORIGIN}/sitemap.xml`} />
+      <link rel="alternate" type="application/rss+xml" title="Deep Clearance Dispatch" href={`${SITE_ORIGIN}/dispatches/rss.xml`} />
       {dispatch?.revision && <meta name="dispatch-revision" content={String(dispatch.revision)} />}
       <meta property="og:type" content={dispatch ? "article" : "website"} />
       <meta property="og:locale" content="en_US" />

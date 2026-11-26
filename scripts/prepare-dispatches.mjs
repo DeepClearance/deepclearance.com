@@ -45,15 +45,27 @@ for (const article of published) {
 }
 const list = [...articles.values()].sort((a, b) => b.date.localeCompare(a.date));
 await writeFile(snapshot, JSON.stringify(list));
-const escape = (value) => String(value).replace(/[<>&"']/g, char =>
+const escape = (value) => String(value ?? "").replace(/[<>&"']/g, char =>
   ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", '"': "&quot;", "'": "&apos;" })[char]);
+// Real timestamps: the newsroom's first-publish time; repo articles may set publishedAt, else midnight UTC of date.
+const firstPublished = (article) => new Date(article.publishedAt || `${article.date}T00:00:00Z`);
+const updated = (article) => new Date(article.updatedAt || article.publishedAt || `${article.date}T00:00:00Z`);
+const newest = list.length ? new Date(Math.max(...list.map(article => updated(article).getTime()))) : new Date(0);
 const items = list.map(article => {
   const link = `${origin}/dispatches/${article.slug}/`;
-  return `<item><title>${escape(article.title)}</title><link>${link}</link><guid>${link}</guid><description>${escape(article.summary)}</description><pubDate>${new Date(article.date).toUTCString()}</pubDate></item>`;
+  return `<item><title>${escape(article.title)}</title><link>${link}</link><guid isPermaLink="true">${link}</guid><description>${escape(article.summary)}</description><pubDate>${firstPublished(article).toUTCString()}</pubDate></item>`;
 });
 await mkdir("public/dispatches", { recursive: true });
 await writeFile("public/dispatches/rss.xml", `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0"><channel><title>Deep Clearance Dispatch</title><link>${origin}/dispatches/</link><description>Deep Clearance reporting and analysis</description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Deep Clearance Dispatch</title><link>${origin}/dispatches/</link><description>Deep Clearance reporting and analysis</description><language>en</language><lastBuildDate>${newest.toUTCString()}</lastBuildDate><atom:link href="${origin}/dispatches/rss.xml" rel="self" type="application/rss+xml"/>
 ${items.join("\n")}
 </channel></rss>
+`);
+// Dispatch sitemap, listed in robots.txt next to the hand-kept /sitemap.xml, so newsroom stories are indexed.
+const urls = [`<url><loc>${origin}/dispatches/</loc><lastmod>${newest.toISOString()}</lastmod></url>`,
+  ...list.map(article => `<url><loc>${origin}/dispatches/${article.slug}/</loc><lastmod>${updated(article).toISOString()}</lastmod></url>`)];
+await writeFile("public/dispatches/sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls.join("\n")}
+</urlset>
 `);

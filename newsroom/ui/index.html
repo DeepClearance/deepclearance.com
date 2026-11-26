@@ -8,7 +8,8 @@
 <main>
   <form id="login">
     <h1>Newsroom sign-in</h1>
-    <label>Editor key<input id="key" type="password" required autocomplete="off"></label>
+    <p>Behind Cloudflare Access, leave the key empty.</p>
+    <label>Editor key<input id="key" type="password" autocomplete="off"></label>
     <button>Sign in</button>
   </form>
   <p id="status" role="status"></p>
@@ -16,7 +17,10 @@
     <nav aria-label="Dispatches">
       <button id="new">New dispatch</button>
       <div id="stories"></div>
+      <p id="whoami"></p>
       <button id="export">Export revisions</button>
+      <button id="ledger">Export approval ledger</button>
+      <button id="quality">Quality report</button>
       <button id="deploy">Retry site update</button>
       <button id="logout">Sign out</button>
     </nav>
@@ -50,8 +54,11 @@
     <h2>Review X post</h2>
     <p id="x-copy" style="white-space: pre-wrap"></p>
     <img id="x-card" alt="" hidden>
+    <p id="x-length"></p>
+    <label>Note for the ledger (optional)<input id="x-note" maxlength="1000"></label>
     <p id="x-status" role="status"></p>
     <button type="button" id="send-x">Approve and publish on X</button>
+    <button type="button" id="reject-x">Reject</button>
   </dialog>
 </main>
 <script type="module" src="/editor.js"></script>

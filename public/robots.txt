@@ -3,5 +3,6 @@ Allow: /
 Disallow: /account/
 
 Sitemap: https://deepclearance.com/sitemap.xml
+Sitemap: https://deepclearance.com/dispatches/sitemap.xml
 
 # https://deepclearance.com/llms.txt

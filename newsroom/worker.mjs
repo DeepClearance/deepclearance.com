@@ -1,4 +1,6 @@
-import { xRoute } from "./x-publish.mjs";
+import { buildAuthorized, editorIdentity, rateLimited, recordFailure } from "./lib/auth.mjs";
+import * as ledger from "./lib/ledger.mjs";
+import { xRoute } from "./lib/x-publish.mjs";
 
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const mediaPattern = /^[a-f0-9]{64}\.(png|jpg|webp)$/;
@@ -6,17 +8,6 @@ const mediaTypes = { "image/png": "png", "image/jpeg": "jpg", "image/webp": "web
 
 function json(value, status = 200) {
   return Response.json(value, { status, headers: { "cache-control": "no-store" } });
-}
-
-async function authorized(request, secret) {
-  if (!secret) return false;
-  const encode = (value) => new TextEncoder().encode(value);
-  const hash = (value) => crypto.subtle.digest("SHA-256", encode(value));
-  const [actual, expected] = await Promise.all([
-    hash(request.headers.get("authorization") || ""), hash(`Bearer ${secret}`),
-  ]);
-  return new Uint8Array(actual).reduce((diff, byte, index) =>
-    diff | (byte ^ new Uint8Array(expected)[index]), 0) === 0;
 }
 
 function date(value) {
@@ -72,17 +63,34 @@ async function route(request, env) {
   const method = request.method;
   if (!pathname.startsWith("/api/")) return env.ASSETS.fetch(request);
   const build = pathname.startsWith("/api/build/");
-  if (!(await authorized(request, build ? env.BUILD_TOKEN : env.EDITOR_TOKEN))) {
+  if (await rateLimited(request, env)) return json({ error: "Too many failed sign-ins. Try again later." }, 429);
+  const identity = build ? null : await editorIdentity(request, env);
+  if (build ? !(await buildAuthorized(request, env)) : !identity) {
+    await recordFailure(request, env);
     return json({ error: "Access denied." }, 401);
   }
 
+  if (pathname === "/api/editor/whoami" && method === "GET") return json(identity);
+  if (pathname === "/api/editor/ledger" && method === "GET") {
+    const rows = await ledger.list(env);
+    if (new URL(request.url).searchParams.get("format") === "holds") {
+      return new Response(rows.map(ledger.toHoldsLine).join("\n") + "\n", {
+        headers: { "content-type": "text/markdown; charset=utf-8", "cache-control": "no-store" },
+      });
+    }
+    return json(rows);
+  }
+  if (pathname === "/api/editor/quality" && method === "GET") return json(await ledger.quality(env));
+
   if (pathname === "/api/build/dispatches" && method === "GET") {
     const { results } = await env.DB.prepare(
-      "SELECT e.content, e.revision FROM editions e WHERE published = 1 AND revision = (SELECT MAX(p.revision) FROM editions p WHERE p.slug = e.slug AND p.published = 1)",
+      `SELECT e.content, e.revision, e.recorded_at AS updated_at,
+              (SELECT MIN(f.recorded_at) FROM editions f WHERE f.slug = e.slug AND f.published = 1) AS published_at
+         FROM editions e WHERE published = 1 AND revision = (SELECT MAX(p.revision) FROM editions p WHERE p.slug = e.slug AND p.published = 1)`,
     ).all();
-    return json(results.map(({ content, revision }) => {
-      const { xCopy, ...article } = JSON.parse(content);
-      return { ...article, revision };
+    return json(results.map(({ content, revision, published_at: publishedAt, updated_at: updatedAt }) => {
+      const { xCopy, draftXCopy, claims, pipeline, ...article } = JSON.parse(content);
+      return { ...article, revision, publishedAt, updatedAt };
     }));
   }
 
@@ -138,7 +146,7 @@ async function route(request, env) {
 
   const distribution = pathname.match(/^\/api\/editor\/x\/([^/]+)$/);
   if (distribution && slugPattern.test(distribution[1]) && ["GET", "POST"].includes(method)) {
-    return xRoute(request, env, distribution[1], json);
+    return xRoute(request, env, distribution[1], json, identity);
   }
 
   const entry = pathname.match(/^\/api\/editor\/dispatches\/([^/]+)$/);
@@ -163,6 +171,10 @@ async function route(request, env) {
       "INSERT INTO editions (slug, revision, published, content) SELECT ?, ?, ?, ? WHERE ? = COALESCE((SELECT MAX(revision) FROM editions WHERE slug = ?), 0)",
     ).bind(article.slug, revision + 1, Number(publish), JSON.stringify(article), revision, article.slug).run();
     if (!result.meta.changes) return json({ error: "This story changed. Reopen it before saving." }, 409);
+    if (publish) {
+      await ledger.record(env, { kind: "site_publish", slug: article.slug, revision: revision + 1, text: article.title,
+        imageKey: article.image?.key, actor: identity.user, actorMethod: identity.method, decision: "approved", mode: "queue" });
+    }
     return json({ ...article, revision: revision + 1, published: publish, deployment: publish ? await deployment(env) : null });
   }
   return json({ error: "Not found." }, 404);

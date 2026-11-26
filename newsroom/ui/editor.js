@@ -10,7 +10,8 @@ let busy = false;
 async function request(path, options = {}) {
   const { headers, ...init } = options;
   const response = await fetch(`/api/editor/${path}`, {
-    ...init, headers: { ...headers, authorization: `Bearer ${token}` },
+    ...init, headers: token ? { ...headers, authorization: `Bearer ${token}` } : { ...headers },
+    credentials: "same-origin",
   });
   if (!response.ok) throw new Error((await response.json()).error);
   return response;
@@ -87,7 +88,9 @@ async function action(fn) {
 $("login").onsubmit = (event) => {
   event.preventDefault();
   action(async () => {
-    token = $("key").value;
+    token = $("key").value || undefined;
+    const me = await (await request("whoami")).json();
+    $("whoami").textContent = `Signed in as ${me.user} (${me.method})`;
     await refresh();
     $("key").value = "";
     $("login").hidden = true;
@@ -167,11 +170,27 @@ form.onsubmit = (event) => {
   });
 };
 
+function download(name, blob) {
+  const href = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = href;
+  link.download = name;
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(href), 1000);
+}
+$("ledger").onclick = () => action(async () => {
+  download("deep-clearance-approvals.md", await (await request("ledger?format=holds")).blob());
+});
+$("quality").onclick = () => action(async () => {
+  download("deep-clearance-quality.json", await (await request("quality")).blob());
+});
+
 $("review-x").onclick = () => action(async () => {
   if (!lockedSlug) throw new Error("Publish this Dispatch to the website first.");
   const path = `x/${encodeURIComponent(lockedSlug)}`;
   const review = await (await request(path)).json();
   $("x-copy").textContent = review.text;
+  $("x-length").textContent = `${review.length} of ${review.maxLength} weighted characters (the link counts as 23)`;
   const dialog = $("x-dialog");
   const card = $("x-card");
   card.hidden = true;
@@ -183,23 +202,32 @@ $("review-x").onclick = () => action(async () => {
     dialog.addEventListener("close", () => URL.revokeObjectURL(card.src), { once: true });
   }
   const send = $("send-x");
+  const reject = $("reject-x");
   const status = $("x-status");
   status.textContent = review.postUrl ? `Published: ${review.postUrl}`
+    : !review.canApprove ? "Only a named approver can decide on X posts."
     : !review.configured ? "X account setup required."
+    : review.length > review.maxLength ? "Too long for X. Shorten the X copy and publish again."
     : ["sending", "uncertain"].includes(review.status) ? "Check the X account before retrying." : "";
-  send.disabled = !review.configured || !review.text || !review.image || !["ready", "failed"].includes(review.status);
-  send.onclick = async () => {
+  send.disabled = !review.canApprove || !review.configured || !review.text || review.length > review.maxLength
+    || !["ready", "failed"].includes(review.status);
+  reject.disabled = !review.canApprove || !review.text || review.status === "posted";
+  const decide = async (decision) => {
     send.disabled = true;
-    status.textContent = "Sending…";
+    reject.disabled = true;
+    status.textContent = decision === "approve" ? "Recording approval and sending…" : "Recording rejection…";
     try {
-      const posted = await (await request(path, {
+      const outcome = await (await request(path, {
         method: "POST", headers: { "content-type": "application/json" },
-        body: JSON.stringify({ revision: review.revision }),
+        body: JSON.stringify({ revision: review.revision, text: review.text, decision, note: $("x-note").value }),
       })).json();
-      status.textContent = `Published: ${posted.postUrl}`;
+      status.textContent = decision === "approve" ? `Published: ${outcome.postUrl} (ledger ${outcome.ref})`
+        : `Rejected (ledger ${outcome.ref})`;
     } catch (error) {
       status.textContent = error.message;
     }
   };
+  send.onclick = () => decide("approve");
+  reject.onclick = () => decide("reject");
   dialog.showModal();
 });

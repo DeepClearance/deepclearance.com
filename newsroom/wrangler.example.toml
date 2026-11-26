@@ -2,6 +2,8 @@ name = "deep-clearance-newsroom"
 main = "worker.mjs"
 compatibility_date = "2026-11-22"
 preview_urls = false
+# Keep the editor off the public internet: put the Worker behind Cloudflare Access (see README).
+workers_dev = true
 
 [assets]
 directory = "./ui"
@@ -15,3 +17,19 @@ database_id = "REPLACE_WITH_D1_DATABASE_ID"
 [[r2_buckets]]
 binding = "MEDIA"
 bucket_name = "deep-clearance-newsroom-media"
+
+[vars]
+# Cloudflare Access (recommended). Team domain like "yourteam.cloudflareaccess.com" and the app's AUD tag.
+ACCESS_TEAM_DOMAIN = ""
+ACCESS_AUD = ""
+# Comma-separated named approvers for X posts: Access emails or EDITOR_TOKENS names. Empty = nobody can approve.
+X_APPROVERS = ""
+AUTH_MAX_FAILURES = "10"
+
+# Secrets (set with `npx wrangler secret put NAME`, never here):
+# EDITOR_TOKENS   JSON {"name": "<sha256 hex of that person's key>"}; per-person editor keys
+# EDITOR_TOKEN    optional legacy shared key; can edit, can never approve X posts
+# BUILD_TOKEN     key the GitHub Pages build uses to read published editions
+# GITHUB_PUBLISH_TOKEN  fine-grained token, Actions: write on DeepClearance/deepclearance.com only
+# X_CLIENT_ID, X_CLIENT_SECRET, X_REFRESH_TOKEN, X_ACCOUNT_ID  Deep Clearance X app + account
+# X_TOKEN_KEY     32 random bytes, base64; seals the rotating X refresh token in D1
